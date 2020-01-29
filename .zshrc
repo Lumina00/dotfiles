@@ -14,6 +14,7 @@
 
 export HISTCONTROL=ignoreboth:erasedups
 export EDITOR=/usr/bin/nvim
+export PATH="/home/luz/.cargo/bin:$PATH"
 
 PS1='[\u@\h \W]\$ '
 
@@ -36,7 +37,6 @@ zplugin ice pick"async.zsh" src"pure.zsh"; zplugin light sindresorhus/pure
 autoload -U compinit
 compinit
 
-export PATH="$HOME/.cargo/bin:$PATH"
 
 
 #list
@@ -119,14 +119,6 @@ alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pac
 
 #mounting the folder Public for exchange between host and guest on virtualbox
 alias vbm="sudo mount -t vboxsf -o rw,uid=1000,gid=1000 Public /home/$USER/Public"
-
-#shopt
-shopt -s autocd # change to named directory
-shopt -s cdspell # autocorrects cd misspellings
-shopt -s cmdhist # save multi-line commands in history as single line
-shopt -s dotglob
-shopt -s histappend # do not overwrite history
-shopt -s expand_aliases # expand aliases
 
 #youtube-dl
 alias yta-aac="youtube-dl --extract-audio --audio-format aac "
