@@ -41,6 +41,7 @@ mod = "mod4"
 mod1 = "alt"
 mod2 = "control"
 home = os.path.expanduser('~')
+term = "/usr/bin/konsole"
 
 
 @lazy.function
@@ -78,20 +79,11 @@ keys = [
 
     Key(["mod1"], "k", lazy.spawn('slimlock')),
     Key(["mod1"], "f", lazy.spawn('firefox')),
-    Key(["mod1"], "h", lazy.spawn('konsole -e htop')),
-    Key(["mod1"], "r", lazy.spawn('konsole -e ranger')),
     Key(["mod1"], "s", lazy.spawn('konsole -e nnn')),
-    Key(["mod1"], "Right", lazy.screen.next_group()),
+    Key(["mod1"], "h", lazy.spawn('konsole -e htop')),
     Key(["mod1"], "Left", lazy.screen.prev_group()),
+    Key(["mod1"], "Right", lazy.screen.next_group()),
     Key(["mod1"], "F2", lazy.spawn('gmrun')),
-    Key(["mod1"], "F3", lazy.spawn('xfce4-appfinder')),
-
-# VARIETY KEYS WITH PYWAL
-
-    Key(["mod1", "shift"], "f", lazy.spawn(home + '/.config/qtile/scripts/set-pywal.sh -f')),
-    Key(["mod1", "shift"], "p", lazy.spawn(home + '/.config/qtile/scripts/set-pywal.sh -p')),
-    Key(["mod1", "shift"], "n", lazy.spawn(home + '/.config/qtile/scripts/set-pywal.sh -n')),
-    Key(["mod1", "shift"], "u", lazy.spawn(home + '/.config/qtile/scripts/set-pywal.sh -u')),
 
 # CONTROL + SHIFT KEYS
 
@@ -99,20 +91,17 @@ keys = [
 
 # SCREENSHOTS
 
-    Key([], "Print", lazy.spawn("scrot 'ArcoLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'")),
-    Key([mod2], "Print", lazy.spawn('xfce4-screenshooter')),
-    Key([mod2, "shift"], "Print", lazy.spawn('gnome-screenshot -i')),
+    Key([], "Print", lazy.spawn("scrot 'ScreenShot-%Y-%m-%d-%s_screenshot_$wx$h.png' -e 'mv $f $$(xdg-user-dir PICTURES)'")),
 
-# MULTIMEDIA KEYS
 
 # INCREASE/DECREASE BRIGHTNESS
-    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 5")),
-    Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 5")),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("light -A 5")),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("light -U 5")),
 
 # INCREASE/DECREASE/MUTE VOLUME
-    Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q set Master 5%-")),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q set Master 5%+")),
+    Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute 0 toggle")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume 0 -5%")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume 0 +5%")),
 
     Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause")),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next")),

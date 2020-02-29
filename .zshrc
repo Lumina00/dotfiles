@@ -5,9 +5,10 @@
 #Ibus settings if you need them
 #type ibus-setup in terminal to change settings and start the daemon
 #delete the hashtags of the next lines and restart
-#export GTK_IM_MODULE=ibus
-#export XMODIFIERS=@im=dbus
-#export QT_IM_MODULE=ibus
+
+export GTK_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+export QT_IM_MODULE=fcitx
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -153,6 +154,9 @@ alias nmirrorlist="sudo nvim /etc/pacman.d/mirrorlist"
 #shutdown or reboot
 alias ssn="sudo shutdown now"
 alias sr="sudo reboot"
+
+#compile to qtile-config.py
+alias compa='python3 -m py_compile config.py'
 
 # # ex = EXtractor for all kinds of archives
 # # usage: ex <file>
