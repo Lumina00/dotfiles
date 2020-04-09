@@ -1,21 +1,15 @@
 #
 # ~/.bashrc
 #
-
 #Ibus settings if you need them
 #type ibus-setup in terminal to change settings and start the daemon
 #delete the hashtags of the next lines and restart
-
-export GTK_IM_MODULE=fcitx
-export XMODIFIERS=@im=fcitx
-export QT_IM_MODULE=fcitx
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
 export HISTCONTROL=ignoreboth:erasedups
 export EDITOR=/usr/bin/nvim
-export PATH="/home/luz/.cargo/bin:$PATH"
 
 PS1='[\u@\h \W]\$ '
 
@@ -39,7 +33,7 @@ autoload -U compinit
 compinit
 
 
-
+HISTSIZE=5
 #list
 alias ls='exa'
 alias la='ls -a'
@@ -53,8 +47,10 @@ alias pdw="pwd"
 alias udpate='sudo pacman -Syyu'
 alias upate='sudo pacman -Syyu'
 alias cls=clear
-
-## Colorize the grep command output for ease of use (good for log files)##
+alias cp='cp -vr'
+alias xd=cd
+alias rm-'rm -rf'
+# Colorize the grep command output for ease of use (good for log files)##
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -77,23 +73,15 @@ alias wget="wget -c"
 #userlist
 alias userlist="cut -d: -f1 /etc/passwd"
 
-#merge new settings
 
 # Aliases for software managment
 # pacman or pm
 alias pacman='sudo pacman --color auto'
 alias update='sudo pacman -Syyu'
 
-# yay as aur helper - updates everything
-alias pksyua="yay -Syu --noconfirm"
-alias upall="yay -Syu --noconfirm"
-
 #ps
 alias ps="ps auxf"
 alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
-
-#grub update
-alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 
 #add new fonts
 alias update-fc='sudo fc-cache -fv'
@@ -105,9 +93,6 @@ alias bupskel='cp -Rf /etc/skel ~/.skel-backup-$(date +%Y.%m.%d-%H.%M.%S)'
 
 #copy bashrc-latest over on bashrc - cb= copy bashrc
 alias cb="cp ~/.bashrc-latest ~/.bashrc && source ~/.bashrc && sudo cp /etc/skel/.bashrc-latest /etc/skel/.bashrc"
-
-#skip integrity check
-alias yayskip='yay -S --mflags --skipinteg'
 
 #check vulnerabilities microcode
 alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
@@ -155,9 +140,6 @@ alias nmirrorlist="sudo nvim /etc/pacman.d/mirrorlist"
 alias ssn="sudo shutdown now"
 alias sr="sudo reboot"
 
-#compile to qtile-config.py
-alias compa='python3 -m py_compile config.py'
-
 # # ex = EXtractor for all kinds of archives
 # # usage: ex <file>
 ex ()
@@ -189,4 +171,3 @@ ex ()
 
 [[ -f ~/.bashrc-personal ]] && . ~/.bashrc-personal
 
-neofetch
