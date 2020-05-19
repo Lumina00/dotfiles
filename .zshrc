@@ -11,6 +11,7 @@
 export HISTCONTROL=ignoreboth:erasedups
 export EDITOR=/usr/bin/nvim
 
+
 PS1='[\u@\h \W]\$ '
 
 if [ -d "$HOME/.bin" ] ;
@@ -20,7 +21,7 @@ fi
 if [ -d "$HOME/.local/bin" ] ;
 	then PATH="$HOME/.local/bin:$PATH"
 fi
-
+source ~/.cargo/env
 source /home/luz/.zsh/zplugin/zplugin.zsh
 autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
@@ -32,8 +33,9 @@ zplugin ice pick"async.zsh" src"pure.zsh"; zplugin light sindresorhus/pure
 autoload -U compinit
 compinit
 
+HISTFILE=
+HISTSIZE=SAVEHIST=4
 
-HISTSIZE=5
 #list
 alias ls='exa'
 alias la='ls -a'
@@ -57,7 +59,7 @@ alias fgrep='fgrep --color=auto'
 
 #readable output
 alias df='df -h'
-
+alias fdisk='sudo fdisk -l'
 #pacman unlock
 alias unlock="sudo rm /var/lib/pacman/db.lck"
 
@@ -77,7 +79,6 @@ alias userlist="cut -d: -f1 /etc/passwd"
 # Aliases for software managment
 # pacman or pm
 alias pacman='sudo pacman --color auto'
-alias update='sudo pacman -Syyu'
 
 #ps
 alias ps="ps auxf"
@@ -85,14 +86,6 @@ alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
 
 #add new fonts
 alias update-fc='sudo fc-cache -fv'
-
-#copy/paste all content of /etc/skel over to home folder - backup of config created - beware
-alias skel='cp -Rf ~/.config ~/.config-backup-$(date +%Y.%m.%d-%H.%M.%S) && cp -rf /etc/skel/* ~'
-#backup contents of /etc/skel to hidden backup folder in home/user
-alias bupskel='cp -Rf /etc/skel ~/.skel-backup-$(date +%Y.%m.%d-%H.%M.%S)'
-
-#copy bashrc-latest over on bashrc - cb= copy bashrc
-alias cb="cp ~/.bashrc-latest ~/.bashrc && source ~/.bashrc && sudo cp /etc/skel/.bashrc-latest /etc/skel/.bashrc"
 
 #check vulnerabilities microcode
 alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
@@ -103,8 +96,6 @@ alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/p
 alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
 alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
 
-#mounting the folder Public for exchange between host and guest on virtualbox
-alias vbm="sudo mount -t vboxsf -o rw,uid=1000,gid=1000 Public /home/$USER/Public"
 
 #youtube-dl
 alias yta-aac="youtube-dl --extract-audio --audio-format aac "
@@ -140,6 +131,9 @@ alias nmirrorlist="sudo nvim /etc/pacman.d/mirrorlist"
 alias ssn="sudo shutdown now"
 alias sr="sudo reboot"
 
+#start ssh
+alias starssh="sudo systemctl start sshd"
+
 # # ex = EXtractor for all kinds of archives
 # # usage: ex <file>
 ex ()
@@ -171,3 +165,4 @@ ex ()
 
 [[ -f ~/.bashrc-personal ]] && . ~/.bashrc-personal
 
+neofetch
