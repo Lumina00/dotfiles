@@ -22,7 +22,7 @@ if [ -d "$HOME/.local/bin" ] ;
 	then PATH="$HOME/.local/bin:$PATH"
 fi
 source ~/.cargo/env
-source /home/luz/.zsh/zplugin/zplugin.zsh
+source /home/luz/.zinit/zplugin/zplugin.zsh
 autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
 
@@ -165,4 +165,3 @@ ex ()
 
 [[ -f ~/.bashrc-personal ]] && . ~/.bashrc-personal
 
-neofetch
