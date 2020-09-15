@@ -21,8 +21,11 @@ fi
 if [ -d "$HOME/.local/bin" ] ;
 	then PATH="$HOME/.local/bin:$PATH"
 fi
+
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="/home/luz/.gem/ruby/2.7.0/bin:$PATH"
 source ~/.cargo/env
-source /home/luz/.zinit/bin/zplugin.zsh
+source /home/luz/.zinit/zplugin/zplugin.zsh
 autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
 
@@ -130,9 +133,10 @@ alias nmirrorlist="sudo nvim /etc/pacman.d/mirrorlist"
 #shutdown or reboot
 alias ssn="sudo shutdown now"
 alias sr="sudo reboot"
+#systemctl 
+alias ctl='sudo systemctl'
 
-#start ssh
-alias starssh="sudo systemctl start sshd"
+alias sensors='sensors dell_smm-virtual-0'
 
 # # ex = EXtractor for all kinds of archives
 # # usage: ex <file>
