@@ -94,7 +94,7 @@ alias update-fc='sudo fc-cache -fv'
 alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
 
 #get fastest mirrors in your neighborhood
-alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
+alias mirror="sudo reflector -f 30 -l 30 --protocol https --protocol http --sort rate --country Japan --verbose --save /etc/pacman.d/mirrorlist"
 alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist"
 alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
 alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
@@ -134,9 +134,11 @@ alias nmirrorlist="sudo nvim /etc/pacman.d/mirrorlist"
 alias ssn="sudo shutdown now"
 alias sr="sudo reboot"
 #systemctl 
-alias ctl='sudo systemctl'
+alias ctl="sudo systemctl"
 
-alias sensors='sensors dell_smm-virtual-0'
+alias sensors="sensors dell_smm-virtual-0"
+
+alias dd='sudo dd status=progress'
 
 # # ex = EXtractor for all kinds of archives
 # # usage: ex <file>
