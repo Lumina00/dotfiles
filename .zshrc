@@ -95,10 +95,6 @@ alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
 
 #get fastest mirrors in your neighborhood
 alias mirror="sudo reflector -f 30 -l 30 --protocol https --protocol http --sort rate --country Japan --verbose --save /etc/pacman.d/mirrorlist"
-alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist"
-alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
-alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
-
 
 #youtube-dl
 alias yta-aac="youtube-dl --extract-audio --audio-format aac "
@@ -122,9 +118,7 @@ alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 alias jctl="journalctl -p 3 -xb"
 
 #nvim
-alias nlightdm="sudo nvim /etc/lightdm/lightdm.conf"
 alias npacman="sudo nvim /etc/pacman.conf"
-alias ngrub="sudo nvim /etc/default/grub"
 alias nmkinitcpio="sudo nvim /etc/mkinitcpio.conf"
 alias nslim="sudo nvim /etc/slim.conf"
 alias noblogout="sudo nvim /etc/oblogout.conf"
