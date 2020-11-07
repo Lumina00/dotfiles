@@ -12,7 +12,6 @@ set ignorecase
 set hidden
 syntax enable
 filetype plugin indent on
-inoremap <silent> jj <ESC>
 set clipboard=unnamed
 
 call plug#begin('~/.local/share/nvim/plugged')
@@ -41,6 +40,15 @@ let g:tagbar_iconchars = ['↠', '↡']
 let mapleader="\<Space>"
 nmap <leader>q :NERDTreeToggle<CR>
 nmap <leader>w :TagbarToggle<CR>
+nmap <leader>h <C-w>h
+nmap <leader>j <C-w>j
+nmap <leader>k <C-w>k
+nmap <leader>l <C-w>l
+nmap <leader>n <C-w>n
+
+
+inoremap <silent> jj <ESC>
+tnoremap <ESC><ESC> <C-\><C-N>
 
 let g:airline_powerline_fonts = 1
 let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
