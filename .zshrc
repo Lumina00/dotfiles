@@ -1,10 +1,7 @@
+
 #
 # ~/.bashrc
 #
-#Ibus settings if you need them
-#type ibus-setup in terminal to change settings and start the daemon
-#delete the hashtags of the next lines and restart
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -25,17 +22,14 @@ fi
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/home/luz/.gem/ruby/2.7.0/bin:$PATH"
 source ~/.cargo/env
-source /home/luz/.zinit/zplugin/zplugin.zsh
+source /home/luz/.zinit/bin/zplugin.zsh
 autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
 
-zplugin light zsh-users/zsh-autosuggestions
 zplugin light zdharma/fast-syntax-highlighting
-zplugin ice pick"async.zsh" src"pure.zsh"; zplugin light sindresorhus/pure
-
 autoload -U compinit
 compinit
-
+eval "$(starship init zsh)"
 HISTFILE=
 HISTSIZE=SAVEHIST=4
 
@@ -133,7 +127,7 @@ alias ctl="sudo systemctl"
 alias sensors="sensors dell_smm-virtual-0"
 
 alias dd='sudo dd status=progress'
-
+alias umount='sudo umount -l'
 # # ex = EXtractor for all kinds of archives
 # # usage: ex <file>
 ex ()
