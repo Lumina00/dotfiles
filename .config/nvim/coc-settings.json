@@ -1,0 +1,9 @@
+{
+    "rust-analyzer.serverPath": "/usr/bin/rust-analyzer",
+    "rust-analyzer.cargo.features": ["rust-analyzer"],
+    "clangd.path": "/usr/bin/clangd",
+    "clangd.semanticHighlighting": true,
+    "clangd.arguments": ["--background-index"],
+    "clangd.fallbackFlags": ["-std=c++20"]
+}
+
