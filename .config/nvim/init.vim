@@ -13,7 +13,7 @@ set hidden
 syntax enable
 filetype plugin indent on
 set clipboard=unnamed
-
+packadd termdebug
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'preservim/nerdtree'
 Plug 'majutsushi/tagbar'
@@ -25,7 +25,6 @@ Plug 'ryanoasis/vim-devicons'
 
 Plug 'rust-lang/rust.vim' 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'vim-ruby/vim-ruby', {'branch': 'release'}
 call plug#end()
 
 let g:coc_global_extension = ['coc-solargraph']

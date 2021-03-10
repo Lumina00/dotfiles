@@ -1,16 +1,4 @@
 
-#
-# ~/.bashrc
-#
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-
-export HISTCONTROL=ignoreboth:erasedups
-export EDITOR=/usr/bin/nvim
-
-
-PS1='[\u@\h \W]\$ '
-
 if [ -d "$HOME/.bin" ] ;
 	then PATH="$HOME/.bin:$PATH"
 fi
@@ -19,19 +7,19 @@ if [ -d "$HOME/.local/bin" ] ;
 	then PATH="$HOME/.local/bin:$PATH"
 fi
 
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="/home/luz/.cargo/bin:$PATH"
 export PATH="/home/luz/.gem/ruby/2.7.0/bin:$PATH"
 source ~/.cargo/env
 source /home/luz/.zinit/bin/zplugin.zsh
 autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
 
+#zplugin light zsh-users/zsh-autosuggestions
 zplugin light zdharma/fast-syntax-highlighting
+#zplugin ice pick"async.zsh" src"pure.zsh"; zplugin light sindresorhus/pure
 autoload -U compinit
 compinit
 eval "$(starship init zsh)"
-HISTFILE=
-HISTSIZE=SAVEHIST=4
 
 #list
 alias ls='exa'
@@ -157,5 +145,4 @@ ex ()
 #create a file called .bashrc-personal and put all your personal aliases
 #in there. They will not be overwritten by skel.
 
-[[ -f ~/.bashrc-personal ]] && . ~/.bashrc-personal
 
