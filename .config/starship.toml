@@ -1,0 +1,3 @@
+[cmd_duration]
+format = "[$duration](bold yellow)"
+
