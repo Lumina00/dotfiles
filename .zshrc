@@ -7,8 +7,9 @@ if [ -d "$HOME/.local/bin" ] ;
 	then PATH="$HOME/.local/bin:$PATH"
 fi
 
-export PATH="/home/luz/.cargo/bin:$PATH"
-export PATH="/home/luz/.gem/ruby/2.7.0/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$home/.gem/ruby/2.7.0/bin:$PATH"
+export EDITOR=/usr/bin/nvim
 source ~/.cargo/env
 source /home/luz/.zinit/bin/zplugin.zsh
 autoload -Uz _zplugin
@@ -36,15 +37,17 @@ alias upate='sudo pacman -Syyu'
 alias cls=clear
 alias cp='cp -vr'
 alias xd=cd
-alias rm-'rm -rf'
+
 # Colorize the grep command output for ease of use (good for log files)##
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
+alias cal='cal -m --color=auto'
 
 #readable output
 alias df='df -h'
 alias fdisk='sudo fdisk -l'
+
 #pacman unlock
 alias unlock="sudo rm /var/lib/pacman/db.lck"
 
@@ -116,6 +119,7 @@ alias sensors="sensors dell_smm-virtual-0"
 
 alias dd='sudo dd status=progress'
 alias umount='sudo umount -l'
+alias clamscan='sudo clamscan --infected --remove'
 # # ex = EXtractor for all kinds of archives
 # # usage: ex <file>
 ex ()

@@ -25,9 +25,19 @@ Plug 'ryanoasis/vim-devicons'
 
 Plug 'rust-lang/rust.vim' 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'autozimu/LanguageClient-neovim', {
+"    \ 'branch': 'next',
+"    \ 'do': 'bash install.sh',
+"    \ }
+
 call plug#end()
 
-let g:coc_global_extension = ['coc-solargraph']
+"let g:coc_global_extension = ['coc-solargraph']
+"let g:LanguageClient_serverCommands = {
+"    \ 'rust': ['/usr/bin/rust-analyzer'],
+"    \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
+"    \ 'cpp' : ['/usr/bin/clangd','--background-index','-std=c++20'],
+"}
 
 let NERDTreeShowHidden=1
 let g:NERDTreeDirArrowExpandable = '↠'

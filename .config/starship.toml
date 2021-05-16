@@ -1,3 +1,32 @@
+add_newline = false
+#format = """
+#$directory$cmd_duration$git_branch$git_commit$git_state$git_status$memory_usege$battery$rust   $time   
+
+[diretory]
+truncation_length = 4
+
+[battery]
+full_symbol = "🔋"
+charging_symbol = "🔌"
+discharging_symbol = "⚡"
+
+[[battery.display]]
+threshold = 30
+style = "bold red"
+
+[memory_usege]
+disabled = false
+show_percentage = true
+style = "bold dimmed white"
+
 [cmd_duration]
-format = "[$duration](bold yellow)"
+style = "bold yellow"
+format = "[$duration]($style)"
+
+[time]
+disabled = true
+style = "bold white"
+time_format = "%R"
+utc_time_offset = "+9"
+format = '[\[ $time \]]($style) '
 
