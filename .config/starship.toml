@@ -2,7 +2,7 @@ add_newline = false
 #format = """
 #$directory$cmd_duration$git_branch$git_commit$git_state$git_status$memory_usege$battery$rust   $time   
 
-[diretory]
+[directory]
 truncation_length = 4
 
 [battery]
@@ -14,10 +14,11 @@ discharging_symbol = "⚡"
 threshold = 30
 style = "bold red"
 
-[memory_usege]
+[memory_usage]
 disabled = false
-show_percentage = true
+threshold = -1
 style = "bold dimmed white"
+format = "$symbol[$ram_pct]($style)   "
 
 [cmd_duration]
 style = "bold yellow"
