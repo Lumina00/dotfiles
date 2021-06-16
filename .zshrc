@@ -15,12 +15,12 @@ source /home/luz/.zinit/bin/zplugin.zsh
 autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
 
-#zplugin light zsh-users/zsh-autosuggestions
+zplugin light zsh-users/zsh-autosuggestions
 zplugin light zdharma/fast-syntax-highlighting
-#zplugin ice pick"async.zsh" src"pure.zsh"; zplugin light sindresorhus/pure
+zplugin ice pick"async.zsh" src"pure.zsh"; zplugin light sindresorhus/pure
 autoload -U compinit
 compinit
-eval "$(starship init zsh)"
+#eval "$(starship init zsh)"
 
 #list
 alias ls='exa'
@@ -148,5 +148,4 @@ ex ()
 
 #create a file called .bashrc-personal and put all your personal aliases
 #in there. They will not be overwritten by skel.
-
 
