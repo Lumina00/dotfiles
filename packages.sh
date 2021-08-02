@@ -11,6 +11,7 @@ git clone https://github.com/zdharma/zinit.git ~/.zinit/bin
 cp .tmux.conf ~/
 cp -r .config ~/
 cp -b .zshrc ~/
+cp -b .gdbinit ~/
 sudo cp -b config.ini /etc/ly/
 sudo cp nftables.conf /etc/nftables.conf
 rustup install stable
