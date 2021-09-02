@@ -1,7 +1,7 @@
 #!/bin/sh 
 sudo pacman -S --noconfirm reflector 
 sudo reflector -f 30 -l 30 --protocol https --protocol http --sort rate --country Japan --verbose --save /etc/pacman.d/mirrorlist
-sudo pacman -Sy --noconfirm rustup ruby zsh uim refind bandwhich mpv lollypop firefox qbittorrent neovim flatpak docker nomacs amd-ucode p7zip amdvlk btrfs-progs easytag yarn anthy lvm2 pipewire pipewire-pulse 
+sudo pacman -Sy --noconfirm rustup ruby zsh refind bandwhich mpv lollypop firefox qbittorrent neovim flatpak docker nomacs amd-ucode p7zip amdvlk btrfs-progs easytag yarn anthy lvm2 pipewire pipewire-pulse 
 
 sudo pacman -S --noconfirm --needed gst-plugins-good qt5-imageformats
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
