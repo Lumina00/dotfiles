@@ -15,3 +15,4 @@ sudo cp nftables.conf /etc/nftables.conf
 cargo install bottom du-dust paru cargo-update
 ./paru.sh
 sudo \cp -f config.ini /etc/ly/
+./privacy.sh
