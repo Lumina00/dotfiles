@@ -9,6 +9,8 @@ fi
 
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$home/.gem/ruby/2.7.0/bin:$PATH"
+export PATH="$home/.local/bin:$PATH"
+
 export EDITOR=/usr/bin/nvim
 source ~/.cargo/env
 source /home/luz/.zinit/bin/zinit.zsh
@@ -32,8 +34,8 @@ alias l.="ls -A | egrep '^\.'"
 #fix obvious typo's
 alias cd..='cd ..'
 alias pdw="pwd"
-alias udpate='sudo pacman -Syyu'
-alias update='sudo pacman -Syyu'
+alias udpate='sudo pacman -Syu'
+alias update='sudo pacman -Syu'
 alias cls=clear
 alias cp='cp -vr'
 alias xd=cd
@@ -82,6 +84,7 @@ alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
 alias mirror="sudo reflector -f 30 -l 30 --protocol https --protocol http --sort rate --country Japan --verbose --save /etc/pacman.d/mirrorlist"
 
 #youtube-dl
+alias youtube-dl='youtube-dl --fragment-retries "infinite"'
 alias yta-aac="youtube-dl --extract-audio --audio-format aac "
 alias yta-best="youtube-dl --extract-audio --audio-format best "
 alias yta-flac="youtube-dl --extract-audio --audio-format flac "
@@ -129,12 +132,12 @@ ex ()
       *.tar.bz2)   tar xjf $1   ;;
       *.tar.gz)    tar xzf $1   ;;
       *.bz2)       bunzip2 $1   ;;
-      *.rar)       unrar x $1   ;;
+      *.rar)       7z x $1   ;;
       *.gz)        gunzip $1    ;;
       *.tar)       tar xf $1    ;;
       *.tbz2)      tar xjf $1   ;;
       *.tgz)       tar xzf $1   ;;
-      *.zip)       unzip $1     ;;
+      *.zip)       7z x $1     ;;
       *.Z)         uncompress $1;;
       *.7z)        7z x $1      ;;
 	  *.deb)       ar x $1      ;;
