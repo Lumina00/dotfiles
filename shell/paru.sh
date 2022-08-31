@@ -1,3 +1,3 @@
 #!/bin/sh
-paru -S dislocker dcron aic94xx-firmware xxd-standalone ly
+paru -S dislocker dcron xxd-standalone ly cppman
 exit

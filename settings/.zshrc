@@ -12,6 +12,7 @@ export PATH="$home/.gem/ruby/2.7.0/bin:$PATH"
 export PATH="$home/.local/bin:$PATH"
 
 export EDITOR=/usr/bin/nvim
+export PAGER=nvim
 source ~/.cargo/env
 source /home/luz/.zinit/bin/zinit.zsh
 autoload -Uz _zplugin
@@ -151,4 +152,3 @@ ex ()
 
 #create a file called .bashrc-personal and put all your personal aliases
 #in there. They will not be overwritten by skel.
-
