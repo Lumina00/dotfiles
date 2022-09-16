@@ -69,7 +69,7 @@ alias update-fc='sudo fc-cache -fv'
 
 alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
 
-alias mirror="sudo reflector -f 30 -l 30 --protocol https --protocol http --sort rate --country Japan --verbose --save /etc/pacman.d/mirrorlist"
+alias mirror="sudo reflector -f 30 -l 30 --protocol https --sort rate --country Japan --verbose --save /etc/pacman.d/mirrorlist"
 
 alias youtube-dl='youtube-dl --fragment-retries "infinite"'
 alias yta-best="youtube-dl --extract-audio --audio-format best "
