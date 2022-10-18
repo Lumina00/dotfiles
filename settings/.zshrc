@@ -53,7 +53,7 @@ alias ctl="sudo systemctl"
 alias dd='sudo dd status=progress'
 alias umount='sudo umount -l'
 alias free="free -mt"
-
+alias rsync='rsync -ahuxv --progress'
 alias unlock="sudo rm /var/lib/pacman/db.lck"
 
 

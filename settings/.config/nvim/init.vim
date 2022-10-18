@@ -2,7 +2,7 @@ set encoding=utf-8
 set nocompatible
 set nu
 set formatoptions+=o
-set expandtab
+"set expandtab
 set tabstop=4
 set shiftwidth=4
 set smartindent
@@ -17,9 +17,10 @@ packadd termdebug
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'preservim/nerdtree'
 Plug 'majutsushi/tagbar'
+Plug 'Yggdroot/indentLine'
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'Yggdroot/indentLine'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ryanoasis/vim-devicons'
 
@@ -55,7 +56,7 @@ nmap <leader>k <C-w>k
 nmap <leader>l <C-w>l
 nmap <leader>n <C-w>n
 
-
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 inoremap <silent> jj <ESC>
 tnoremap <ESC><ESC> <C-\><C-N>
 
