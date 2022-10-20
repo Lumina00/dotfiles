@@ -1,4 +1,5 @@
 set encoding=utf-8
+set fileencoding=utf-8
 set nocompatible
 set nu
 set formatoptions+=o
@@ -12,7 +13,7 @@ set ignorecase
 set hidden
 syntax enable
 filetype plugin indent on
-set clipboard=unnamed
+set clipboard+=unnamedplus
 packadd termdebug
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'preservim/nerdtree'
