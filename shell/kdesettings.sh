@@ -22,3 +22,7 @@ kwriteconfig5 --file klipperrc --group 'General' --key 'KeepClipboardContents' -
 kwriteconfig5 --file kdeglobals --group 'Icons' --key 'Theme' 'candy-icons'
 kwriteconfig5 --file kwinrc --group 'org.kde.kdecoration2' --key 'library' 'org.kde.kwin.aurorae'
 kwriteconfig5 --file kwinrc --group 'org.kde.kdecoration2' --key 'theme' '__aurorae__svg__Diamond'
+
+rm -rf ~/.local/share/Trash
+ln -s /tmp ~/.local/share/Trash
+
