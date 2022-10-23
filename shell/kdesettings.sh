@@ -26,3 +26,4 @@ kwriteconfig5 --file kwinrc --group 'org.kde.kdecoration2' --key 'theme' '__auro
 rm -rf ~/.local/share/Trash
 ln -s /tmp ~/.local/share/Trash
 
+exit
