@@ -87,23 +87,45 @@ ex ()
 {
   if [ -f $1 ] ; then
     case $1 in
-      *.tar.bz2)   tar xjf $1   ;;
-      *.tar.gz)    tar xzf $1   ;;
-      *.bz2)       bunzip2 $1   ;;
-      *.rar)       7z x $1   ;;
-      *.gz)        gunzip $1    ;;
-      *.tar)       tar xf $1    ;;
-      *.tbz2)      tar xjf $1   ;;
-      *.tgz)       tar xzf $1   ;;
-      *.zip)       7z x $1     ;;
-      *.Z)         uncompress $1;;
-      *.7z)        7z x $1      ;;
-	  *.deb)       ar x $1      ;;
-	  *.tar.xz)    tar xf $1   ;;
-      *)           echo "'$1' cannot be extracted via ex()" ;;
+      *.tar.bz2|*.tbz2)   
+        tar xjf $1 ;;
+      *.tar.gz|*.tgz)
+        tar xzf $1 ;;
+	    *.tar.xz|*.txz|*.tar)    
+        tar xf $1  ;;
+      *.rar|*.zip|*.7z|*.Z)
+        7z x $1    ;;
+      *.bz2)       
+        bunzip2 $1 ;;
+      *.gz)        
+        gunzip $1  ;;
+      *.Z)         
+        uncompress $1;;
+	    *.deb)       
+        ar x $1    ;;
+      *)           
+        echo "'$1' cannot be extracted via ex()" ;;
     esac
   else
     echo "'$1' is not a valid file"
   fi
 }
+nvim ()
+{
+  if [ -z $1 ]; then
+	  nvim 
+  elif [ -f $1 ]; then
+    case $1 in
+      *.sh|*.c|*.cc|*.cpp|*.h)   
+        lvim $1		;;
+      *.exe)
+        echo "Binary File" ;;
+      *)		  
+        nvim $1		;;
+	esac
+  elif [ -d $1 ]; then 
+    echo "Diretory"
+  fi
+}
+
 
