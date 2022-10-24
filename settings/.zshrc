@@ -113,7 +113,7 @@ ex ()
 nvim ()
 {
   if [ -z $1 ]; then
-	  nvim 
+	  /usr/bin/nvim 
   elif [ -f $1 ]; then
     case $1 in
       *.sh|*.c|*.cc|*.cpp|*.h)   
@@ -121,7 +121,7 @@ nvim ()
       *.exe)
         echo "Binary File" ;;
       *)		  
-        nvim $1		;;
+        /usr/bin/nvim $1		;;
 	esac
   elif [ -d $1 ]; then 
     echo "Diretory"
