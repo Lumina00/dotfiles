@@ -15,12 +15,12 @@ export EDITOR=/usr/bin/nvim
 export PAGER=nvim
 source ~/.cargo/env
 source ~/.local/share/zinit/zinit.git/zinit.zsh
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
-zinit ice pick"async.zsh" src"pure.zsh"; zplugin light sindresorhus/pure
+zinit ice pick"async.zsh" src"pure.zsh"; zinit light sindresorhus/pure
 autoload -U compinit
 compinit
 #eval "$(starship init zsh)"
