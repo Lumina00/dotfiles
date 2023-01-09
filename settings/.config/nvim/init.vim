@@ -13,7 +13,7 @@ set ignorecase
 set hidden
 syntax enable
 filetype plugin indent on
-set clipboard+=unnamedplus
+set clipboard+=unnamed,unnamedplus
 packadd termdebug
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'preservim/nerdtree'
@@ -24,6 +24,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ryanoasis/vim-devicons'
+Plug 'nvim-lua/plenary.nvim' "Need diffview
+Plug 'sindrets/diffview.nvim'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'autozimu/LanguageClient-neovim', {
 "    \ 'branch': 'next',
