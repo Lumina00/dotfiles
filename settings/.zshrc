@@ -14,7 +14,7 @@ export PATH="$home/.local/bin:$PATH"
 export EDITOR=/usr/bin/nvim
 export PAGER=nvim
 source ~/.cargo/env
-source /home/luz/.zinit/bin/zinit.zsh
+source ~/.local/share/zinit/zinit.git/zinit.zsh
 autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
 
