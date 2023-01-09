@@ -21,6 +21,11 @@ autoload -Uz _zinit
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
 zinit ice pick"async.zsh" src"pure.zsh"; zinit light sindresorhus/pure
+#zinit light-mode for \
+#    zdharma-continuum/zinit-annex-as-monitor \
+#    zdharma-continuum/zinit-annex-bin-gem-node \
+#    zdharma-continuum/zinit-annex-patch-dl \
+#    zdharma-continuum/zinit-annex-rust
 autoload -U compinit
 compinit
 #eval "$(starship init zsh)"
@@ -82,7 +87,7 @@ alias jctl="journalctl -p 3 -xb"
 
 alias npacman="sudo nvim /etc/pacman.conf"
 alias nmkinitcpio="sudo nvim /etc/mkinitcpio.conf"
-
+alias gitdiff="nvim +DiffviewOpen"
 ex ()
 {
   if [ -f $1 ] ; then
@@ -117,15 +122,24 @@ nvim ()
   elif [ -f $1 ]; then
     case $1 in
       *.sh|*.c|*.cc|*.cpp|*.h)   
-        lvim $1		;;
+        lvim $1	;;
       *.exe)
-        echo "Binary File" ;;
+        echo "Binary File"	;;
       *)		  
-        /usr/bin/nvim $1		;;
+        /usr/bin/nvim $1	;;
 	esac
   elif [ -d $1 ]; then 
     echo "Diretory"
+
+	else
+		/usr/bin/nvim $1
   fi
+		
 }
 
 
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+
+### End of Zinit's installer chunk
