@@ -8,13 +8,12 @@ if [ -d "$HOME/.local/bin" ] ;
 fi
 
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$home/.gem/ruby/2.7.0/bin:$PATH"
-export PATH="$home/.local/bin:$PATH"
-
 export EDITOR=/usr/bin/nvim
 export PAGER=nvim
+
 source ~/.cargo/env
 source ~/.local/share/zinit/zinit.git/zinit.zsh
+
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
@@ -60,19 +59,14 @@ alias umount='sudo umount -l'
 alias free="free -mt"
 alias rsync='rsync -ahuxv --progress'
 alias unlock="sudo rm /var/lib/pacman/db.lck"
-
-
 alias wget="wget -c"
-
-alias userlist="cut -d: -f1 /etc/passwd"
-
-
 alias ps="ps auxf"
 alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
 
 alias update-fc='sudo fc-cache -fv'
 
 alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
+alias userlist="cut -d: -f1 /etc/passwd"
 
 alias mirror="sudo reflector -f 30 -l 30 --protocol https --sort rate --country Japan --verbose --save /etc/pacman.d/mirrorlist"
 
@@ -106,7 +100,7 @@ ex ()
         gunzip $1  ;;
       *.Z)         
         uncompress $1;;
-	    *.deb)       
+	  *.deb)       
         ar x $1    ;;
       *)           
         echo "'$1' cannot be extracted via ex()" ;;
@@ -130,16 +124,7 @@ nvim ()
 	esac
   elif [ -d $1 ]; then 
     echo "Diretory"
-
-	else
-		/usr/bin/nvim $1
-  fi
-		
+  else
+	/usr/bin/nvim $1
+	fi
 }
-
-
-
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-
-### End of Zinit's installer chunk
