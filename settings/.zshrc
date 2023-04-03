@@ -62,6 +62,7 @@ alias wget="wget -c"
 alias ps="ps auxf"
 alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias sftp="sftp -R 1288 -B 65536"
+alias make='make -j 15'
 alias update-fc='sudo fc-cache -fv'
 
 alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
