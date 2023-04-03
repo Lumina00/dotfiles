@@ -1,0 +1,1 @@
+cryptdevice=/dev/nvme0n1p2:cryptlvm:allow-discards root=/dev/myvg/root acpi_backlight=vendor amdgpu.runnpm=0 iommu=pt iommu=1 add_efi_memmap rw acpi_osi='Windows 2020' idle=nomwait nowatchdog

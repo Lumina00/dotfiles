@@ -7,7 +7,8 @@ cp -r .config ~/
 \cp -f .zshrc ~    
 \cp -f .gdbinit ~    
 sudo cp nftables.conf /etc/nftables.conf    
-sudo cp ./linux-lts.preset /etc/mkinitcpio.d/linux-lts.preset    
+sudo cp ./linux-lts.preset /etc/mkinitcpio.d/linux-lts.preset
+sudo cp ./cmdline /etc/kernel/cmdline 
 sudo \cp -f config.ini /etc/ly/    
 ../shell/privacy.sh
 xdg-user-dirs-update    
