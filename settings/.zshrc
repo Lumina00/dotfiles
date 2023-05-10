@@ -38,6 +38,7 @@ alias cd..='cd ..'
 alias pdw="pwd"
 alias udpate='sudo pacman -Syu'
 alias update='sudo pacman -Syu'
+alias remove='pacman -Rscn'
 alias cls=clear
 alias cp='cp -vr'
 alias xd=cd
@@ -62,25 +63,21 @@ alias wget="wget -c"
 alias ps="ps auxf"
 alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias sftp="sftp -R 1288 -B 65536"
-alias make='make -j 15'
+alias make='make -j 16'
+alias makepkg='makepkg -sriCfc'
 alias update-fc='sudo fc-cache -fv'
 
 alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
 alias userlist="cut -d: -f1 /etc/passwd"
-
 alias mirror="sudo reflector -f 30 -l 30 --protocol https --sort rate --country Japan --verbose --save /etc/pacman.d/mirrorlist"
 
 alias youtube-dl='youtube-dl --fragment-retries "infinite"'
 alias yta-best="youtube-dl --extract-audio --audio-format best "
 
 alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -100"
-
 alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
-
 alias jctl="journalctl -p 3 -xb"
 
-alias npacman="sudo nvim /etc/pacman.conf"
-alias nmkinitcpio="sudo nvim /etc/mkinitcpio.conf"
 alias gitdiff="nvim +DiffviewOpen"
 ex ()
 {
