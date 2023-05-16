@@ -1,5 +1,5 @@
 #!/bin/sh
 
-sudo cp -r ../settings/network/* /etc/NetworkManager/conf.d/
+sudo cp -r ../dotfiles/network/* /etc/NetworkManager/conf.d/
 
 exit

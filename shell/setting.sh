@@ -1,7 +1,7 @@
 #!/bin/sh
 curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
-cd ../settings
+cd ../dotfiles/
 cp .tmux.conf ~/    
 cp -r .config ~/        
 \cp -f .zshrc ~    
@@ -17,4 +17,6 @@ xdg-user-dirs-update
 sudo systemctl mask NetworkManager-wait-online.service   
 sudo systemctl enable --now NetworkManager nftables
 ./kdesettings.sh 
+git clone https://github.com/lukechilds/refind-ambience /tmp/ambience/
+sudo cp -r /tmp/ambience /boot/efi/EFI/refind/themes/ambience
 exit
