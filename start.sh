@@ -1,7 +1,7 @@
 #!/bin/sh
 
-./shell/packages.sh &
-./shell/setting.sh &
+./shell/pacman.sh
+./shell/rust.sh & ./shell/setting.sh
 wait
 
 echo "Complete"

@@ -6,10 +6,11 @@ cp .tmux.conf ~/
 cp -r .config ~/        
 \cp -f .zshrc ~    
 \cp -f .gdbinit ~    
-sudo cp nftables.conf /etc/nftables.conf    
+sudo \cp -f nftables.conf /etc/nftables.conf    
 sudo cp nft-blackhole.conf /etc/nft-blackhole.conf
-sudo cp ./linux-lts.preset /etc/mkinitcpio.d/linux-lts.preset
-sudo cp ./cmdline /etc/kernel/cmdline 
+sudo cp linux-lts.preset /etc/mkinitcpio.d/linux-lts.preset
+sudo cp cmdline /etc/kernel/cmdline 
+sudo cp mkinitcpio.conf /etc/mkinitcpio.conf
 sudo \cp -f config.ini /etc/ly/    
 ../shell/privacy.sh
 xdg-user-dirs-update    

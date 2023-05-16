@@ -7,7 +7,7 @@
 
 git clone https://github.com/EliverLara/candy-icons ~/.local/share/icons/candy-icons
 lookandfeeltool -a org.kde.breezedark.desktop
-kwriteconfig --file kdeglobals --group RecentDocuments --key UseRecent false
+#kwriteconfig --file kdeglobals --group RecentDocuments --key UseRecent false
 kwriteconfig5 --file kdeglobals --group RecentDocuments --key UseRecent false
 kwriteconfig5 --file kwinrc --group Compositing --key 'AnimationSpeed' '0'
 kwriteconfig5 --file kwinrc --group Plugins --key 'slidingpopupsEnabled' --type 'bool' 'false'
