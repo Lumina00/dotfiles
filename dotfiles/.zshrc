@@ -106,22 +106,22 @@ ex ()
     echo "'$1' is not a valid file"
   fi
 }
-nvim ()
-{
-  if [ -z $1 ]; then
-	  /usr/bin/nvim 
-  elif [ -f $1 ]; then
-    case $1 in
-      *.sh|*.c|*.cc|*.cpp|*.h)   
-        lvim $1	;;
-      *.exe)
-        echo "Binary File"	;;
-      *)		  
-        /usr/bin/nvim $1	;;
-	esac
-  elif [ -d $1 ]; then 
-    echo "Diretory"
-  else
-	/usr/bin/nvim $1
-	fi
-}
+#nvim ()
+#{
+#  if [ -z $1 ]; then
+#	  /usr/bin/nvim 
+#  elif [ -f $1 ]; then
+#    case $1 in
+#      *.sh|*.c|*.cc|*.cpp|*.h)   
+#        lvim $1	;;
+#      *.exe)
+#        echo "Binary File"	;;
+#      *)		  
+#        /usr/bin/nvim $1	;;
+#	esac
+#  elif [ -d $1 ]; then 
+#    echo "Diretory"
+#  else
+#	/usr/bin/nvim $1
+#	fi
+#}
