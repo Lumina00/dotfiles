@@ -63,7 +63,7 @@ alias wget="wget -c"
 alias ps="ps auxf"
 alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias sftp="sftp -R 1288 -B 65536"
-alias sshfs="sudo sshfs -F /home/luz/.ssh/config -o allow_other,default_permissions"
+alias sshfs="sshfs -F /home/luz/.ssh/config -o allow_other"
 alias make='make -j 16'
 alias makepkg='makepkg -sriCfc'
 alias update-fc='sudo fc-cache -fv'
@@ -72,9 +72,10 @@ alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
 alias userlist="cut -d: -f1 /etc/passwd"
 alias mirror="sudo reflector -f 30 -l 30 --protocol https --sort rate --country Japan --verbose --save /etc/pacman.d/mirrorlist"
 
-alias youtube-dl='youtube-dl --fragment-retries "infinite"'
-alias yta-best="youtube-dl --extract-audio --audio-format best "
-
+#alias youtube-dl='youtube-dl --fragment-retries "infinite"'
+#alias yta-best="youtube-dl --extract-audio --audio-format best "
+alias yta-best="yt-dlp -f 'ba' -x --audio-format mp3"
+alias yt-best="yt-dlp -f 'bv&+ba'"
 alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -100"
 alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 alias jctl="journalctl -p 3 -xb"
