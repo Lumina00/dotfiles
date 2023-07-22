@@ -8,5 +8,5 @@ else PROFPATH=$(grep 'Path=' profiles.ini | sed 's/^Path=//')
 fi
 cd $WorkingDiretory
 echo 'user_pref("browser.cache.disk.parent_diretory","/run/user/'$(id -u)'/firefox")' >> ../dotfiles/.mozilla/user.js
-#\cp -r ../.mozilla/user.js $PROFPATH/user.js
+\cp -r ../.mozilla/user.js $PROFPATH/user.js
 exit
