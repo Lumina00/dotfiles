@@ -15,6 +15,7 @@ sudo cp mkinitcpio.conf /etc/mkinitcpio.conf
 sudo \cp -f config.ini /etc/ly/
 sudo ln -s ~/.var/app /var/lib/flatpak/app/
 ../shell/privacy.sh
+../shell/firefox.sh
 xdg-user-dirs-update    
 sudo systemctl mask NetworkManager-wait-online.service   
 sudo systemctl enable --now NetworkManager nftables
