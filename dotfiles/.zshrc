@@ -85,7 +85,7 @@ ex ()
 {
   if [ -f $1 ] ; then
     case $1 in
-		*.tar.bz2|*.tbz2|*.tar.gz|*.tar.tgz|*.tar.xz|*.txz|*.tar)    
+		*.tar.bz2|*.tbz2|*.tar.gz|*.tgz|*.tar.xz|*.txz|*.tar)    
 			tar xf $1  ;;
 		*.rar|*.zip|*.7z|*.Z)
 			7z x $1 -o'*' ;;
