@@ -9,7 +9,7 @@ fi
 
 export PATH="$HOME/.cargo/bin:$PATH"
 export EDITOR=/usr/bin/nvim
-export PAGER=nvim
+export PAGER=less
 
 source ~/.local/share/zinit/zinit.git/zinit.zsh
 
@@ -92,7 +92,7 @@ ex ()
 	    *.tar.xz|*.txz|*.tar)    
         tar xf $1  ;;
       *.rar|*.zip|*.7z|*.Z)
-        7z x $1    ;;
+        7z x $1 -o'*' ;;
       *.bz2)       
         bunzip2 $1 ;;
       *.gz)        
