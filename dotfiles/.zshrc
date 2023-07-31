@@ -97,8 +97,6 @@ ex ()
         bunzip2 $1 ;;
       *.gz)        
         gunzip $1  ;;
-      *.Z)         
-        uncompress $1;;
 	  *.deb)       
         ar x $1    ;;
       *)           
