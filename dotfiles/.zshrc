@@ -85,24 +85,24 @@ ex ()
 {
   if [ -f $1 ] ; then
     case $1 in
-      *.tar.bz2|*.tbz2)   
-        tar xjf $1 ;;
-      *.tar.gz|*.tgz)
-        tar xzf $1 ;;
-	    *.tar.xz|*.txz|*.tar)    
-        tar xf $1  ;;
-      *.rar|*.zip|*.7z|*.Z)
-        7z x $1 -o'*' ;;
-      *.bz2)       
-        bunzip2 $1 ;;
-      *.gz)        
-        gunzip $1  ;;
-	  *.deb)       
-        ar x $1    ;;
-      *)           
-        echo "'$1' cannot be extracted via ex()" ;;
-    esac
-  else
+		*.tar.bz2|*.tbz2)   
+			tar xjf $1 ;;
+		*.tar.gz|*.tgz)
+			tar xzf $1 ;;
+		*.tar.xz|*.txz|*.tar)    
+			tar xf $1  ;;
+		*.rar|*.zip|*.7z|*.Z)
+			7z x $1 -o'*' ;;
+		*.bz2)       
+			bunzip2 $1 ;;
+		*.gz)        
+			gunzip $1  ;;
+		*.deb)       
+			ar x $1    ;;
+		*)           
+			echo "'$1' cannot be extracted via ex()" ;;
+	esac
+else
     echo "'$1' is not a valid file"
   fi
 }
