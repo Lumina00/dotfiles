@@ -81,9 +81,8 @@ alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 alias jctl="journalctl -p 3 -xb"
 
 alias gitdiff="nvim +DiffviewOpen"
-ex ()
-{
-  if [ -f $1 ] ; then
+
+extract_archive() {
     case $1 in
 		*.tar.bz2|*.tbz2|*.tar.gz|*.tgz|*.tar.xz|*.txz|*.tar)    
 			tar xf $1  ;;
@@ -98,9 +97,16 @@ ex ()
 		*)           
 			echo "'$1' cannot be extracted via ex()" ;;
 	esac
-else
-    echo "'$1' is not a valid file"
-  fi
+}
+ex() {
+	if [ -f $1 ]; then
+		extract_archive "$1"
+	elif [ -d $1 ]; then 
+		for archive in "$1"/*
+		do 
+			extract_archive "$archive"
+		done
+	fi
 }
 #nvim ()
 #{
