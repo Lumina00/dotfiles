@@ -134,13 +134,13 @@ ex() {
 	for target in "${args[@]}"; do 
 		if [ -f "$target" ]; then
 			extract_archive "$target"
-			if [ $? -eq 0 ] || [ "$option" == "-r" ]; then
+			if [ $? -eq 0 ] && [ "$option" == "-r" ]; then
 				rm "$target"
 			fi
 		elif [ -d "$target" ]; then 
 			for archive in "$target"/*; do 
 				extract_archive "$archive"
-				if [ $? -eq 0 ] || [ "$option" == "-r" ]; then
+				if [ $? -eq 0 ] && [ "$option" == "-r" ]; then
 					rm "$archive"
 				fi
 			done
