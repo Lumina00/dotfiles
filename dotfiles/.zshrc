@@ -1,4 +1,3 @@
-
 if [ -d "$HOME/.bin" ] ;
 	then PATH="$HOME/.bin:$PATH"
 fi
@@ -82,65 +81,62 @@ alias jctl="journalctl -p 3 -xb"
 
 alias gitdiff="nvim +DiffviewOpen"
 
-extract_archive() {
-    case $target in
-		*.tar.bz2|*.tbz2|*.tar.gz|*.tgz|*.tar.xz|*.txz|*.tar)    
-			tar xf $target  ;;
-		*.rar|*.zip|*.7z|*.Z)
-			7z x $target -o'*' ;;
-		*.bz2)       
-			bunzip2 $target ;;
-		*.gz)        
-			gunzip $target  ;;
-		*.deb)       
-			ar x $target    ;;
-		*)           
-			echo "'$target' cannot be extracted via ex()" ;;
-	esac
-}
 help_ex(){
 	echo "Usage: ex [<option>] <file/directory>"
 	echo "options: "
 	echo "r 	Remove archive after extract"
 }
+
+extract_archive() {
+    case $1 in
+		*.tar.bz2|*.tbz2|*.tar.gz|*.tgz|*.tar.xz|*.txz|*.tar)    
+			tar xf $1  ;;
+		*.rar|*.zip|*.7z|*.Z)
+			7z x $1 -o'*' ;;
+		*.bz2)       
+			bunzip2 $1 ;;
+		*.gz)        
+			gunzip $1  ;;
+		*.deb)       
+			ar x $1    ;;
+		*)           
+			echo "'$1' cannot be extracted via ex()" ;;
+	esac
+}
 ex() {
-	if [ $# -lt 1 ]; then
+	local option=""
+	local args=()
+
+	if [ $# -eq 0 ]; then
 		help_ex
 		return 1
 	fi
-	
-	option=""
-	args=()
-	
-	if [ "$1" = "-r" ]; then
+	for arg in "$@" 
+	do 
+		if [ "$arg" = "-r" ]; then 
 		option="$1"
 		shift
-	fi 
-	
-	for arg in "$@"; do
-		if [ -f "$arg" ] || [ -d "$arg" ]; then
-			args+=("$arg")
-		else
-			echo "File or directory not found: $arg"
-			return 1
+	elif [ "$arg" = '.' ]; then 
+		for file in *; do 
+		args+=("$file")
+		done
+		shift
+	elif [ -f "$arg" ] || [ -d "$arg" ]; then
+		args+=("$arg")
+		shift
 		fi
 	done
-	
-	if [ ${#args[@]} -eq 0 ]; then
-		echo "No valid files or directories provided"
-		return 1
-	fi
-	
+
 	for target in "${args[@]}"; do 
-		if [ -f "$target" ]; then
+		if [ -f ]; then
 			extract_archive "$target"
-			if [ $? -eq 0 ] && [ "$option" == "-r" ]; then
-				rm "$target"
-			fi
-		elif [ -d "$target" ]; then 
-			for archive in "$target"/*; do 
+				if [ $? -eq 0 ] && [ "$option" = "-r" ]; then
+					rm "$target"
+				fi
+		elif [ -d ]; then 
+			for archive in "$target"/* do 
 				extract_archive "$archive"
-				if [ $? -eq 0 ] && [ "$option" == "-r" ]; then
+				if [ $? -eq 0 ] && [ "$option" = "-r" ]; then
 					rm "$archive"
 				fi
 			done
@@ -167,3 +163,4 @@ ex() {
 #	/usr/bin/nvim $1
 #	fi
 #}
+
