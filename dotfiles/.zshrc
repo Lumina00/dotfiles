@@ -111,30 +111,33 @@ ex() {
 		help_ex
 		return 1
 	fi
+
 	for arg in "$@" 
 	do 
 		if [ "$arg" = "-r" ]; then 
-		option="$1"
-		shift
-	elif [ "$arg" = '.' ]; then 
-		for file in *; do 
-		args+=("$file")
-		done
-		shift
-	elif [ -f "$arg" ] || [ -d "$arg" ]; then
-		args+=("$arg")
-		shift
-		fi
+			option="$1"
+			shift
+		elif [ "$arg" = '.' ]; then 
+			for file in *; do 
+				args+=("$file")
+			done
+			shift
+		elif [ -f "$arg" ] || [ -d "$arg" ]; then
+			args+=("$arg")
+			shift
+		fi 
 	done
 
-	for target in "${args[@]}"; do 
+	for target in "${args[@]}"; 
+	do 
 		if [ -f ]; then
 			extract_archive "$target"
 				if [ $? -eq 0 ] && [ "$option" = "-r" ]; then
 					rm "$target"
 				fi
 		elif [ -d ]; then 
-			for archive in "$target"/* do 
+			for archive in "$target"/* 
+			do 
 				extract_archive "$archive"
 				if [ $? -eq 0 ] && [ "$option" = "-r" ]; then
 					rm "$archive"
