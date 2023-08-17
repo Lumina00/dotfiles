@@ -22,7 +22,7 @@ xdg-user-dirs-update
 sudo systemctl mask NetworkManager-wait-online.service   
 sudo systemctl enable --now NetworkManager nftables
 sudo sed -i "23s/$/ --graceful/" /usr/lib/systemd/system/systemd-pcrmachine.service
-$shell/kdesettings.sh 
+./$shell/kdesettings.sh 
 git clone https://github.com/lukechilds/refind-ambience /tmp/ambience/
 sudo cp -r /tmp/ambience /boot/efi/EFI/refind/themes/ambience
 exit
