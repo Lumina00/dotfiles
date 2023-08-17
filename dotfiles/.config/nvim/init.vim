@@ -7,6 +7,8 @@ set formatoptions+=o
 set tabstop=4
 set shiftwidth=4
 set smartindent
+set showmatch
+set wmnu
 set hlsearch
 set incsearch
 set ignorecase
