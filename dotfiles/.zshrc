@@ -35,8 +35,8 @@ alias l.="ls -A | egrep '^\.'"
 
 alias cd..='cd ..'
 alias pdw="pwd"
-alias udpate='sudo pacman -Syu'
 alias update='sudo pacman -Syu'
+alias udpate='update'
 alias remove='pacman -Rscn'
 alias cls=clear
 alias cp='cp -vr'
