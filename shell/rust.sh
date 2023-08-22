@@ -1,7 +1,7 @@
 #!/bin/sh
 
 rustup install stable
-./cargo.sh
-./paru.sh
+shell/cargo.sh
+shell/paru.sh
 
 exit
