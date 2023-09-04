@@ -8,7 +8,7 @@ cp .tmux.conf ~/
 cp -r .config ~/        
 \cp -f .zshrc ~    
 \cp -f .gdbinit ~    
-echo -e "!/usr/bin/nft -f\ndefind ssh = $1\ndefine private = $2" | cat - nftables.conf > nftables.conf.new
+echo -e "#!/usr/bin/nft -f\ndefine ssh = $1\ndefine private = $2" | cat - nftables.conf > nftables.conf.new
 sudo \cp -f nftables.conf.new /etc/nftables.conf
 sudo cp nft-blackhole.conf /etc/nft-blackhole.conf
 sudo cp linux-lts.preset /etc/mkinitcpio.d/linux-lts.preset
