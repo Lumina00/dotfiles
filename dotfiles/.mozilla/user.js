@@ -3,7 +3,7 @@ user_pref("browser.cache.disk.smart_size.enabled", "false");
 user_pref("browser.cache.disk_cache_ssl", "false");
 user_pref("browser.cache.offline.enable", "false");
 
-//user_pref("media.ffmpeg.vaapi.enabled", "true");
+user_pref("media.ffmpeg.vaapi.enabled", "true");
 
 user_pref("geo.provider.use_gpsd", false); 
 user_pref("geo.provider.use_geoclue", false);
