@@ -20,6 +20,7 @@ packadd termdebug
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'preservim/nerdtree'
 Plug 'majutsushi/tagbar'
+Plug 'hrsh7th/nvim-cmp'
 Plug 'Yggdroot/indentLine'
 
 Plug 'vim-airline/vim-airline'
@@ -28,16 +29,21 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-lua/plenary.nvim' "Need diffview
 Plug 'sindrets/diffview.nvim'
+
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-omni'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-
+"Plug 'hrsh7th/cmp-path'
+"Plug 'hrsh7th/cmp-cmdline'
+Plug 'onsails/lspkind-nvim'
+Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
+Plug 'mrded/nvim-lsp-notify'
+Plug 'nvimdev/lspsaga.nvim'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'autozimu/LanguageClient-neovim', {
 "    \ 'branch': 'next',
