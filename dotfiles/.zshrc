@@ -81,72 +81,6 @@ alias jctl="journalctl -p 3 -xb"
 
 alias gitdiff="nvim +DiffviewOpen"
 
-help_ex(){
-	echo "Usage: ex [<option>] <file/directory>"
-	echo "options: "
-	echo "r 	Remove archive after extract"
-}
-
-extract_archive() {
-    case $1 in
-		*.tar.bz2|*.tbz2|*.tar.gz|*.tgz|*.tar.xz|*.txz|*.tar)    
-			tar xf $1  ;;
-		*.rar|*.zip|*.7z|*.Z)
-			7z x $1 -o'*' ;;
-		*.bz2)       
-			bunzip2 $1 ;;
-		*.gz)        
-			gunzip $1  ;;
-		*.deb)       
-			ar x $1    ;;
-		*)           
-			echo "'$1' cannot be extracted via ex()" ;;
-	esac
-}
-ex() {
-	local option=""
-	local args=()
-
-	if [ $# -eq 0 ]; then
-		help_ex
-		return 1
-	fi
-
-	for arg in "$@" 
-	do 
-		if [ "$arg" = "-r" ]; then 
-			option="$1"
-			shift
-		elif [ "$arg" = '.' ]; then 
-			for file in *; do 
-				args+=("$file")
-			done
-			shift
-		elif [ -f "$arg" ] || [ -d "$arg" ]; then
-			args+=("$arg")
-			shift
-		fi 
-	done
-
-	for target in "${args[@]}"; 
-	do 
-		if [ -f ]; then
-			extract_archive "$target"
-				if [ $? -eq 0 ] && [ "$option" = "-r" ]; then
-					rm "$target"
-				fi
-		elif [ -d ]; then 
-			for archive in "$target"/* 
-			do 
-				extract_archive "$archive"
-				if [ $? -eq 0 ] && [ "$option" = "-r" ]; then
-					rm "$archive"
-				fi
-			done
-		fi
-	done
-}
-
 #nvim ()
 #{
 #  if [ -z $1 ]; then
@@ -167,3 +101,100 @@ ex() {
 #	fi
 #}
 
+help_ex(){
+        echo "Usage: ex [<option>] <file/directory>"
+        echo "options: "
+        echo " -r   Remove archive after extract"		
+}
+is_encrypted() {
+    
+	local file="$1"
+	local result=$(7z l -paaa "$file" 2>&1| grep -o 'Wrong password')
+	local result2=$(7z l "$file")| grep -o '7zAES$'
+
+    if [ "$result" = "Wrong password" ]; then
+        return 0
+    else
+       if [ "$result2" = "7zAES" ]; then 
+		   return 0
+	   else 
+		   return 1 
+	   fi
+    fi
+}
+extract_archive() {
+        local file="$1"
+		local password=""
+
+		if is_encrypted "$file" "$password"; then
+			read password\?"Enter password for '$file': "
+		fi
+
+		if [ -n "$password" ]; then
+			7z x -p"$password" "$file" -o'*'
+		else
+			echo "Error: This archive is required password" 
+		fi
+
+    	case "$file" in
+                *.tar.bz2|*.tbz2|*.tar.gz|*.tgz|*.tar.xz|*.txz|*.tar)    
+                        tar xf "$file"  ;;
+                *.rar|*.zip|*.7z|*.Z)
+                        7z x "$file" -o'*' ;;
+                *.bz2)       
+                        bunzip2 "$file" ;;
+                *.gz)        
+                        gunzip "$file"  ;;
+                *.deb)       
+                        ar x "$file"    ;;
+                *)           
+                        echo "'"$file"' cannot be extracted via ex()" ;;
+				esac
+}
+ex() {
+    local option=""
+    local password=""
+    local args=()
+
+    if [ $# -eq 0 ]; then
+        help_ex
+        return 1
+    fi
+
+    while [ $# -gt 0 ]; do
+        case "$1" in
+            -r)
+                option="-r"
+                shift
+                ;;
+            *)
+                if [ -e "$1" ]; then
+                    args+=("$1")
+                else
+                    echo "Error: '$1' does not exist."
+                fi
+                shift
+                ;;
+        esac
+    done
+
+    for target in "${args[@]}"; do
+        if [ -f "$target" ]; then
+            extract_archive "$target" "$password"
+            if [ $? -eq 0 ] && [ "$option" = "-r" ]; then
+                rm "$target"
+            fi
+        elif [ -d "$target" ]; then
+            for archive in "$target"/*; do
+                if [ -e "$archive" ]; then
+                    extract_archive "$archive" "$password"
+                    if [ $? -eq 0 ] && [ "$option" = "-r" ]; then
+                        rm "$archive"
+                    fi
+                else
+                    echo "Error: '$archive' does not exist."
+                fi
+            done
+        fi
+    done
+}

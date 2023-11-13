@@ -28,6 +28,16 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-lua/plenary.nvim' "Need diffview
 Plug 'sindrets/diffview.nvim'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'autozimu/LanguageClient-neovim', {
 "    \ 'branch': 'next',
@@ -35,7 +45,7 @@ Plug 'sindrets/diffview.nvim'
 "    \ }
 
 call plug#end()
-
+lua require('lsp_config')
 "let g:coc_global_extension = ['coc-solargraph']
 "let g:LanguageClient_serverCommands = {
 "    \ 'rust': ['/usr/bin/rust-analyzer'],
