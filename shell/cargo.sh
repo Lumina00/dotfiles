@@ -1,3 +1,3 @@
 #!/bin/sh
-cargo install du-dust paru cargo-update
+cargo install du-dust paru cargo-update bat
 

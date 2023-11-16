@@ -73,7 +73,7 @@ lspconfig.pyright.setup({
 	lsp_attach = lsp_attach,
 	capabilities = capabilities,
 })
-nvim_lsp.jsonls.setup({
-	on_attach = on_attach,
+lspconfig.jsonls.setup({
+	lsp_attach = lsp_attach,
 	capabilities = capabilities,
 })
