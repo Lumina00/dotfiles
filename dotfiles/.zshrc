@@ -66,7 +66,7 @@ alias sshfs="sudo sshfs -F /home/luz/.ssh/config -o allow_other"
 alias make='make -j 16'
 alias makepkg='makepkg -sriCfc'
 alias update-fc='sudo fc-cache -fv'
-alias cat=bat
+alias cat='bat -p'
 
 alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
 alias userlist="cut -d: -f1 /etc/passwd"
