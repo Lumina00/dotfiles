@@ -6,7 +6,10 @@ if [ -d "$HOME/.local/bin" ] ;
 	then PATH="$HOME/.local/bin:$PATH"
 fi
 
-export PATH="$HOME/.cargo/bin:$PATH"
+
+if [ -d "$HOME/.cargo/bin" ] ;
+	then PATH="$HOME/.cargo/bin:$PATH"
+fi
 export EDITOR=/usr/bin/nvim
 export PAGER=less
 
@@ -66,7 +69,7 @@ alias sshfs="sudo sshfs -F /home/luz/.ssh/config -o allow_other"
 alias make='make -j 16'
 alias makepkg='makepkg -sriCfc'
 alias update-fc='sudo fc-cache -fv'
-alias cat='bat -p'
+alias cat='bat -pp' 
 
 alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
 alias userlist="cut -d: -f1 /etc/passwd"
