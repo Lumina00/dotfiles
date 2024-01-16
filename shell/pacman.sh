@@ -5,6 +5,6 @@ sudo reflector -f 30 -l 30 --protocol https --protocol http --sort rate --countr
 sudo pacman -S --noconfirm --needed rustup cmake docker nodejs \
   zsh refind bandwhich mpv gst-plugins-good kid3 firefox-developer-{edition,edition-i18n-ja} qbittorrent neovim xclip wl-clipboard rsync\
   flatpak amd-ucode p7zip btrfs-progs pipewire pipewire-pulse wireplumber amdvlk mesa-vdpau vulkan-radeon libva-mesa-driver xorg-{server,xauth,xinit,xrandr} xf86-video-amdgpu xdg-user-dirs nftables noto-fonts-cjk iwd ly\
-  plasma-desktop powerdevil bluedevil plasma-pa plasma-nm spectacle kgamma5 kscreen qt5-imageformats kdeconnect konsole dolphin gwenview
+  plasma-desktop powerdevil bluedevil bluez-obex plasma-pa plasma-nm spectacle kgamma5 kscreen qt5-imageformats kdeconnect konsole dolphin gwenview
 sudo pacman -Rdd wpa_supplicant
 exit
