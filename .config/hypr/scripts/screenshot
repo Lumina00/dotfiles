@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+mode=$1
+activespace=$(hyprctl -j activeworkspace | jq -r '(.monitor)')
+filename=$(xdg-user-dir PICTURES)/$(date +'Screenshot_%Y-%m-%d-%H:%M:%S.png')
+
+if [[ "$1" == "select" ]]; then
+	grim -g "$(slurp)" $filename
+	notify-send -i $filename "Screenshot saved"
+elif [[ "$1" == "full" ]]; then
+	grim -o $activespace $filename
+	notify-send -i $filename "Full Screenshot saved"
+fi 

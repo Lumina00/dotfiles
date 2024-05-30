@@ -1,0 +1,226 @@
+;; =================== VARS =====================
+(defvar bat-reveal false)
+(defvar wifi-reveal false)
+(defvar bluetooth-reveal false)
+(defvar volume-reveal false)
+(defvar brightness-reveal false)
+
+(defpoll battery :interval "1m" "scripts/battery -i")
+(defpoll battery-lvl :interval "30s" "scripts/battery -l")
+(defpoll brightness-lvl :interval "3s" "scripts/backlight --get")
+(defpoll bluetooth :interval "30s" "scripts/bluetooth -i")
+(defpoll bluetooth-state :interval "30s" "scripts/bluetooth -l")
+(defpoll ssid :interval "3m" "scripts/network -l")
+(defpoll wifi-icon :interval "30s" "scripts/network -i")
+
+(deflisten volume-lvl :initial "0" "scripts/audio --get-vol")
+
+(defwidget sep []
+  (box :class "seperator-box" :vexpand "false" :hexpand "false"
+    (label :class "seperator" :text "|")))
+
+(defwidget left []
+  (box :orientation "h" :space-evenly "false" :class "launcher-box"
+    (button :class "app-launcher" :tooltip "Open Application Launcher" :onclick "scripts/launch-apps -l" "󱓞")
+    (button :class "dashboard-launcher" :tooltip "Open Dashboard." :onclick "scripts/launch-apps -d" "")
+    (button :class "open-term" :tooltip "Open Terminal." :onclick "scripts/launch-apps -t" "")))
+
+(defwidget clock []
+	(box 
+		:class "clock-box" 
+		:space-evenly "false" 
+		:hexpand "false" 
+		:vexpand "false"
+		(label 
+			:class "time"
+			:text {formattime(EWW_TIME, "%H:%M", "Asia/Tokyo")}
+		)
+	)
+)
+
+(defwidget battery []
+	(eventbox 
+  		:onhover "/usr/bin/eww -c $HOME/.config/eww/bar/ update bat-reveal=true"
+    	:onhoverlost "/usr/bin/eww -c $HOME/.config/eww/bar/ update bat-reveal=false"
+    	(box 
+			:class "battery-box" 
+			:orientation "h" 
+			:space-evenly "false" 
+			:vexpand "false" 
+			:hexpand "false"
+      		(label 
+				:class "bat-icon" 
+				:text battery
+			)
+      		(revealer 
+				:transition "slideright" 
+				:reveal bat-reveal 
+				:duration "350ms"
+        		(label 
+					:class "bat-label" 
+					:text "${battery-lvl}")
+			)
+		)
+ 	)
+)
+
+(defwidget wifi []
+	(eventbox 
+  		:onhover "/usr/bin/eww -c $HOME/.config/eww/bar/ update wifi-reveal=true"
+    	:onhoverlost "/usr/bin/eww -c $HOME/.config/eww/bar/ update wifi-reveal=false"
+    	(box 
+			:class "wifi-box" 
+			:orientation "h" 
+			:space-evenly "false" 
+			:vexpand "false" 
+			:hexpand "false"
+      		(label 
+				:class "wifi-icon" 
+				:text wifi-icon
+			)
+      		(revealer 
+				:transition "slideright" 
+				:reveal wifi-reveal 
+				:duration "350ms"
+        		(label 
+					:class "wifi-label" 
+					:text ssid
+				)
+			)
+		)
+	)
+)
+
+(defwidget brightness []
+  	(eventbox 
+		:onhover "/usr/bin/eww -c $HOME/.config/eww/bar/ update brightness-reveal=true"
+    	:onhoverlost "/usr/bin/eww -c $HOME/.config/eww/bar/ update brightness-reveal=false"
+    	(box 
+			:class "brightness-box" 
+			:orientation "h" 
+			:space-evenly "false" 
+			:vexpand "false" 
+			:hexpand "false"
+      		(label 
+				:class "brightness-icon" 
+				:text "󰃝"
+			)
+      		(revealer 
+				:transition "slideright" 
+				:reveal brightness-reveal :duration "350ms"
+        		(scale 
+					:class "brightness-scale"
+					:width 100 
+					:active true 
+					:value brightness-lvl 
+					:min 0 
+					:max 256 
+					:orientation "h" 
+					:onchange "brightnessctl s {}%"
+				)
+			)
+		)
+	)
+)
+
+(defwidget volume []
+  	(eventbox 
+		:onhover "/usr/bin/eww -c $HOME/.config/eww/bar/ update volume-reveal=true"
+    	:onhoverlost "/usr/bin/eww -c $HOME/.config/eww/bar/ update volume-reveal=false"
+    	(box 
+			:class "volume-box" 
+			:orientation "h" 
+			:space-evenly "false" 
+			:vexpand "false" 
+			:hexpand "false"
+      		(label 
+				:class "volume-icon" 
+				:text ""
+			)
+      		(revealer 
+				:transition "slideright" 
+				:reveal volume-reveal 
+				:duration "350ms"
+        		(scale 
+					:class "volume-scale" 
+					:width 100 
+					:active true 
+					:value volume-lvl 
+					:min 0 
+					:max 101 
+					:orientation "h" 
+					:onchange "pactl set-sink-volume @DEFAULT_SINK@ {}%"
+				)
+			)
+		)
+	)
+)
+
+(defwidget bluetooth []
+	(eventbox 
+		:onhover "/usr/bin/eww -c $HOME/.config/eww/bar/ update bluetooth-reveal=true"
+    	:onhoverlost "/usr/bin/eww -c $HOME/.config/eww/bar/ update bluetooth-reveal=false"
+		(box 
+			:class "bluetooth-box" 
+			:orientation "h" 
+			:space-evenly "false" 
+			:vexpand "false" 
+			:hexpand "false"
+      		(label 
+				:class "bluetooth-icon" 
+				:text bluetooth
+			)
+      		(revealer 
+				:transition "slideright" 
+				:reveal bluetooth-reveal 
+				:duration "350ms"
+				(label 
+					:class "bluetooth-label" 
+					:text bluetooth-state 
+				)
+			)
+		)
+	)
+)
+
+(defwidget end []
+	(box :orientation "h"
+    	:space-evenly false
+    	:halign "end"
+    	:class "center-modules"
+    	(systray)
+    	(bluetooth)
+    	(volume)
+    	(brightness)
+    	(wifi)
+    	(battery)
+    	(sep)
+    	(clock)))
+
+(defwidget start []
+  (box :orientation "h"
+    :space-evenly false
+    :halign "start"
+    :class "start-modules"
+    (left)))
+
+(defwidget bar-stuff []
+  (box :class "bar-class"
+    :orientation "h"
+    (start)
+    (end)))
+
+;; =================== WINDOWS =====================
+
+(defwindow panel
+  :geometry (geometry :x "0%" :y "-15px" :width "100%" :height "55px" :anchor "bottom center")
+  :stacking "fg"
+  :windowtype "dock"
+  :monitor 0
+  :exclusive true
+  :wm-ignore false
+  (bar-stuff))
+
+(defwindow system :monitor 0 :stacking "fg" :focusable "false" :screen 1
+  :geometry (geometry :x 120 :y 710 :width 300 :height 283)
+  (system))

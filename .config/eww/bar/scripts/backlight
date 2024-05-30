@@ -1,0 +1,16 @@
+#!/bin/bash
+
+get_brightness() {
+  	echo "$(brightnessctl get)"
+}
+
+set_brightness() {
+  brightnessctl set $1
+}
+
+
+if [[ "$1" == "--get" ]]; then
+	get_brightness
+elif [[ "$1" == "--set" ]]; then
+	set_brightness "$2"
+fi

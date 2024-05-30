@@ -1,0 +1,200 @@
+$bg: #232634;
+$bg-alt: #292c3c;
+$fg: #cdd6f4;
+$fg-alt: #bac2de;
+$red: #e78284;
+$red-alt: #ed8796;
+$green: #a6d189;
+$green-alt: #a6da95;
+$yellow: #e5c890;
+$yellow-alt: #eed49f;
+$orange: #ef9f76;
+$orange-alt: #f5a97f;
+$blue: #8caaee;
+$blue-alt: #8aadf4;
+$purple: #ca9ee6;
+$purple-alt: #c6a0f6;
+$cyan: #99d1db;
+$cyan-alt: #91d7e3;
+$gray: #626880;
+$gray-alt: #5b6078;
+
+* {
+  all: unset;
+  transition: 200ms ease-out;
+}
+
+.panel {
+  background-color: #232634;
+}
+
+.genwin {
+  background-color: #232634;
+  border-radius: 15px;
+}
+
+
+.app-launcher {
+  font-family: "Material Design Icons Desktop";
+  font-size: 24px;
+  padding: 0px 6px 0px 6px;
+  margin: 9px 11px 9px 11px;
+  border-radius: 10px;
+  color: $purple;
+}
+
+.bat-label {
+  font-family: "Proxima Nova";
+  font-weight: bold;
+  padding: 0px 10px 0px 0px;
+  color: $green;
+  font-size: 18px;
+}
+.bat-icon {
+	font-family: "Material Design Icons Desktop";
+	font-size: 22px;
+	color: $green;
+	padding: 0.5rem;
+	margin-left: 10px;
+	margin-right: 7px;
+}
+.seperator {
+  font-size: 30px;
+  font-weight: bold;
+  color: $gray-alt;
+  padding: 0px 0px 0px 10px;
+}
+
+.wifi-icon {
+	font-family: "Material Design Icons Desktop";
+	font-size: 22px;
+	color: $purple;
+	margin-left: 10px;
+	margin-right: 7px;
+}
+
+.wifi-label {
+  font-family: "Proxima Nova";
+  font-weight: bold;
+  padding: 0px 10px 0px 0px;
+  color: $red;
+  font-size: 22px;
+}
+
+.brightness-icon {
+	font-family: "Material Design Icons Desktop";
+	font-size: 22px;
+	color: $yellow;
+	margin-left: 10px;
+	margin-right: 7px;
+}
+
+.brightness-scale trough {
+  border-radius: 20px;
+  background-color: $gray;
+  box-shadow: 0px 0px 7px #141414;
+}
+
+.brightness-scale highlight {
+  padding: 0.5em;
+  border-radius: 20px;
+  background: linear-gradient(to right, $yellow-alt, $yellow);
+}
+
+.volume-icon {
+  font-family: "Favorites";
+  font-size: 22px;
+  color: $green;
+  margin-left: 10px;
+  margin-right: 7px;
+}
+
+.volume-scale trough {
+  border-radius: 20px;
+  background-color: $gray;
+  box-shadow: 0px 0px 7px #141414;
+}
+
+.volume-scale highlight {
+  padding: 0.5em;
+  border-radius: 20px;
+  background: linear-gradient(to left, $green, $green-alt);
+}
+
+.bluetooth-icon {
+  font-family: "Material Design Icons Desktop";
+  font-size: 22px;
+  color: $red;
+  margin-left: 10px;
+  margin-right: 7px;
+}
+
+.bluetooth-label {
+  font-family: "Proxima Nova";
+  font-weight: bold;
+  padding: 0px 10px 0px 0px;
+  color: $green;
+  font-size: 22px;
+}
+
+.clock-box {
+	font-family: "Proxima Nova";
+	font-size: 22px;
+	font-weight: bold;
+	padding: 0.5rem;
+	color: $yellow;
+	margin-left: 10px;
+	margin-right: 7px;
+}
+
+/*********Calendar*********/
+calendar {
+  background-color: $bg;
+  font-size: 24px;
+  color: $fg;
+  border-radius: 15px;
+}
+
+calendar:selected {
+  color: $orange;
+}
+
+calendar {
+  &.highlight {
+       padding: 20px;
+   }
+
+   padding: 5px 5px 5px 5px;
+   margin-left: 10px;
+ }
+
+calendar.header {
+  color: $green;
+  font-weight: 900;
+  font-size: 24px;
+  background-color: $bg;
+  border: $bg;
+}
+
+calendar.button {
+  color: $blue;
+  font-weight: bold;
+  background-color: $bg;
+  padding-left: 10px;
+}
+
+calendar.highlight {
+  color: $yellow;
+  font-weight: bold;
+  background-color: $bg;
+}
+
+calendar:indeterminate {
+  color: $red;
+  background-color: $bg;
+}
+
+.calendar {
+  background-color: $bg;
+}
+

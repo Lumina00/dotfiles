@@ -1,0 +1,55 @@
+#!/bin/bash
+
+wifi=$(awk 'NR==3 {printf("%.0f",$3*10/7)}' /proc/net/wireless)
+ssid=$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d\: -f2)
+wired=$(nmcli -t -f NAME connection show --active | grep "Wired" | cut -d\: -f2)
+status=false
+
+connect() {
+	isWiredconnect
+	isWificonnect
+}
+
+isWiredconnect() {
+	if [[ -n "$wired" ]]; then
+		status=true
+	fi
+}
+
+isWificonnect() {
+	if [[ $status == "true" ]]; then
+		echo "Ethernet"
+		return 0
+	fi
+
+	if [[ -z "$ssid" ]]; then
+		echo "Disconnected"
+	else 
+		echo ${ssid}
+	fi
+}
+
+icon() {
+	isWiredconnect
+
+	if [[ "$status" == true ]]; then
+		echo ""
+	elif [[ "$wifi" -ge "75" ]]; then
+		echo "󰤨"
+    elif [[ "$wifi" -ge "50" ]] && [[ "$wifi" -lt "75" ]]; then
+        echo "󰤥"
+    elif [[ "$wifi" -ge "25" ]] && [[ "$wifi" -lt "50" ]]; then
+        echo "󰤢"
+    elif [[ "$wifi" -ge "1" ]] && [[ "$wifi" -lt "25" ]]; then
+        echo "󰤟"
+    else
+        echo "󰤮"
+    fi
+}
+
+
+if [[ $1 = "-l" ]]; then
+    connect
+elif [[ $1 = "-i" ]]; then
+    icon
+fi

@@ -1,0 +1,25 @@
+#!/usr/bin/bash
+
+# variables
+config=$HOME/.config/hypr
+scripts=$config/scripts
+
+# notification daemon
+dunst &
+
+# waybar
+#$scripts/launch_waybar &
+
+
+eww -c ~/.config/eww/bar/ open panel
+
+swayidle -w timeout 300 '$HOME/.config/hypr/scripts/lock' timeout 600 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep '$HOME/.config/hypr/scripts/lock' & 
+
+# wallpaper
+$scripts/wallpaper $config/wallpapers/5.png &
+
+# other
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
+
+kime &

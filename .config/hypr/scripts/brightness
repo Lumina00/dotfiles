@@ -1,0 +1,31 @@
+#!/usr/bin/bash 
+
+get_brightness() {
+	LIGHT="$(cat /sys/class/backlight/amdgpu_bl1/brightness)"
+	echo $LIGHT
+}
+
+get_icon() {
+	current="$(cat /sys/class/backlight/amdgpu_bl1/brightness)"
+}
+
+notify_user() {
+	notify-send -u low "Screen Brightness : $(brightnessctl g -d amdgpu_bl1)"
+}
+
+Inc_backlight() {
+	brightnessctl -d amdgpu_bl1 set 2%+ && notify_user 
+}
+
+dec_backlight() {
+	brightnessctl -d amdgpu_bl1 set 2%- && notify_user 
+}
+
+if [[ "$1" == "--get" ]]; then
+	brightnessctl g -d amdgpu_bl1
+elif [[ "$1" == "--up" ]]; then
+	Inc_backlight
+elif [[ "$1" == "--down" ]]; then
+	dec_backlight
+else get_brightness
+fi 

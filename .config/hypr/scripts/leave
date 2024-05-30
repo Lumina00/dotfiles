@@ -1,0 +1,15 @@
+#!/usr/bin/bash 
+
+select=$(printf "Lock\nSuspend\nReboot\nShutdown\nLogout" | wofi -d)
+
+if [[ $select == "Lock" ]]; then
+	bash ~/.config/hypr/scripts/lock
+elif [[ $select == "Suspend" ]]; then
+	systemctl suspend
+elif [[ $select == "Reboot" ]]; then
+	systemctl reboot 
+elif [[ $select == "Shutdown" ]]; then
+	systemctl poweroff
+elif [[ $select == "Logout" ]]; then
+	pkill -u "$USER"
+fi
