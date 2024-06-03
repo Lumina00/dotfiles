@@ -4,4 +4,4 @@
 
 * dashboard
 * bar->music
-
+* weather
