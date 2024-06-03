@@ -12,17 +12,39 @@
 (defpoll bluetooth-state :interval "30s" "scripts/bluetooth -l")
 (defpoll ssid :interval "3m" "scripts/network -l")
 (defpoll wifi-icon :interval "30s" "scripts/network -i")
-
+(defpoll SONG :interval "5s"	"scripts/music --song")
+;; (defpoll ARTIST :interval "1s"	"scripts/music --artist")
 (deflisten volume-lvl :initial "0" "scripts/audio --get-vol")
 
 (defwidget sep []
-  (box :class "seperator-box" :vexpand "false" :hexpand "false"
-    (label :class "seperator" :text "|")))
+	(box 
+		:class "seperator-box" 
+		:vexpand "false" 
+		:hexpand "false"
+    	(label 
+			:class "seperator" 
+			:text "|"
+		)
+	)
+)
 
 (defwidget left []
-  (box :orientation "h" :space-evenly "false" :class "launcher-box"
-    (button :class "app-launcher" :tooltip "Open Application Launcher" :onclick "scripts/launch-apps -l" "󱓞")
-    (button :class "open-term" :tooltip "Open Terminal." :onclick "scripts/launch-apps -t" "")))
+	(box 
+		:orientation "h" 
+		:space-evenly "false" 
+		:class "launcher-box"
+		(button 
+			:class "app-launcher" 
+			:tooltip "Open Application Launcher" 
+			:onclick "scripts/launch-apps -l" "󱓞"
+		)
+    	(button 
+			:class "open-term" 
+			:tooltip "Open Terminal." 
+			:onclick "scripts/launch-apps -t" ""
+		)
+	)
+)
 
 (defwidget clock []
 	(box 
@@ -33,6 +55,30 @@
 		(label 
 			:class "time"
 			:text {formattime(EWW_TIME, "%H:%M", "Asia/Tokyo")}
+		)
+	)
+)
+
+(defwidget music []
+	(eventbox
+		:class "music-box"
+		(box
+			:orientation "h"
+			:spacing 0
+			:valign "center"
+			:space-evenly "false"
+			(label 
+				:class "song"
+				:halign "start"
+				:wrap "false"
+				:text SONG
+			)
+	;;		(label 
+	;;			:class "artist"
+	;;			:halign "start"
+	;;			:wrap "false"
+	;;			:text ARTIST
+	;;		)
 		)
 	)
 )
@@ -183,43 +229,80 @@
 )
 
 (defwidget end []
-	(box :orientation "h"
-    	:space-evenly false
-    	:halign "end"
-    	:class "center-modules"
-    	(systray)
-    	(bluetooth)
-    	(volume)
-    	(brightness)
-    	(wifi)
-    	(battery)
-    	(sep)
-    	(clock)))
+	(box 
+		:orientation "h"
+    		:space-evenly false
+    		:halign "end"
+    		:class "center-modules"
+    		(systray)
+    		(bluetooth)
+    		(volume)
+    		(brightness)
+    		(wifi)
+    		(battery)
+    		(sep)
+    		(clock)
+	)
+)
 
 (defwidget start []
-  (box :orientation "h"
-    :space-evenly false
-    :halign "start"
-    :class "start-modules"
-    (left)))
+	(box :orientation "h"
+    	:space-evenly false
+    	:halign "start"
+    	:class "start-modules"
+    	(left)
+	)
+)
+
+(defwidget center []
+	(box 
+		:orientation "h"
+		:halign "center"
+		:class "center"
+		(music)
+	)
+)
 
 (defwidget bar-stuff []
-  (box :class "bar-class"
-    :orientation "h"
-    (start)
-    (end)))
+	(box 
+		:class "bar-class"
+			:orientation "h"
+    		(start)
+			(center)
+    		(end)
+	)
+)
 
 ;; =================== WINDOWS =====================
 
 (defwindow panel
-  :geometry (geometry :x "0%" :y "-15px" :width "156%" :height "55px" :anchor "bottom center")
-  :stacking "fg"
-  :windowtype "dock"
-  :monitor 0
-  :exclusive true
-  :wm-ignore false
-  (bar-stuff))
+	:geometry 
+		(geometry 
+			:x "0%" 
+			:y "-15px" 
+			:width "156%" 
+			:height "55px" 
+			:anchor "bottom center"
+		)
+	:stacking "fg"
+	:windowtype "dock"
+	:monitor 0
+	:exclusive true
+	:wm-ignore false
+	(bar-stuff)
+)
 
-(defwindow system :monitor 0 :stacking "fg" :focusable "false" :screen 1
-  :geometry (geometry :x 120 :y 710 :width 300 :height 283)
-  (system))
+(defwindow system 
+	:monitor 0 
+	:stacking "fg" 
+	:focusable "false" 
+	:screen 1 
+	:geometry 
+		(geometry 
+			:x 120 
+			:y 710 
+			:width 300 
+			:height 283
+		)
+	(system)
+)

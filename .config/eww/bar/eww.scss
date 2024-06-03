@@ -42,7 +42,13 @@ $gray-alt: #5b6078;
   border-radius: 10px;
   color: $purple;
 }
-
+.music-box {
+  font-family: "Proxima Nova";
+  font-weight: bold;
+  padding: 0px 10px 0px 0px;
+  color: $yellow;
+  font-size: 20px;
+}
 .bat-label {
   font-family: "Proxima Nova";
   font-weight: bold;
@@ -146,55 +152,3 @@ $gray-alt: #5b6078;
 	margin-left: 10px;
 	margin-right: 7px;
 }
-
-/*********Calendar*********/
-calendar {
-  background-color: $bg;
-  font-size: 24px;
-  color: $fg;
-  border-radius: 15px;
-}
-
-calendar:selected {
-  color: $orange;
-}
-
-calendar {
-  &.highlight {
-       padding: 20px;
-   }
-
-   padding: 5px 5px 5px 5px;
-   margin-left: 10px;
- }
-
-calendar.header {
-  color: $green;
-  font-weight: 900;
-  font-size: 24px;
-  background-color: $bg;
-  border: $bg;
-}
-
-calendar.button {
-  color: $blue;
-  font-weight: bold;
-  background-color: $bg;
-  padding-left: 10px;
-}
-
-calendar.highlight {
-  color: $yellow;
-  font-weight: bold;
-  background-color: $bg;
-}
-
-calendar:indeterminate {
-  color: $red;
-  background-color: $bg;
-}
-
-.calendar {
-  background-color: $bg;
-}
-

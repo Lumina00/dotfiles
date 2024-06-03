@@ -3,5 +3,5 @@
 ## eww
 
 * dashboard
-* bar->music
+~~ * bar->music ~~ 
 * weather
