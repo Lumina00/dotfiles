@@ -36,9 +36,9 @@ get_song-artist() {
 	song=`mpc -f %title% current`
 	artist=`mpc -f %artist% current`
 	if [[ -z "$song" ]] | [[ -z "$artist" ]]; then
-		echo "Offline"
+		echo ""
 	else
-		echo "  $artist - $song"
+		echo "$artist" "-" "$song"
 		
 	fi	
 }
@@ -69,6 +69,15 @@ get_ttime() {
 	fi	
 }
 
+get_perc() {
+    perc=$(mpc status | grep -o '[0-9]*%' | head -n 1 | sed 's/%//')
+	if [[ -z "$perc" ]]; then
+		echo "" 
+	else 
+		echo "$perc"
+	fi
+}
+
 ## Execute accordingly
 if [[ "$1" == "--song" ]]; then
 	get_song-artist
@@ -82,6 +91,8 @@ elif [[ "$1" == "--ctime" ]]; then
 	get_ctime
 elif [[ "$1" == "--ttime" ]]; then
 	get_ttime
+elif [[ "$1" == "--perc" ]]; then 
+	get_perc
 elif [[ "$1" == "--toggle" ]]; then
 	mpc -q toggle
 elif [[ "$1" == "--next" ]]; then

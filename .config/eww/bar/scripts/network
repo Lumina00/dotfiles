@@ -48,8 +48,8 @@ icon() {
 }
 
 
-if [[ $1 = "-l" ]]; then
+if [[ $1 = "--state" ]]; then
     connect
-elif [[ $1 = "-i" ]]; then
+elif [[ $1 = "--icon" ]]; then
     icon
 fi

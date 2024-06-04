@@ -36,8 +36,8 @@ state() {
         fi
 }
 
-if [[ $1 == "-l" ]]; then
+if [[ $1 == "--state" ]]; then
         state
-elif [[ $1 == "-i" ]]; then
+elif [[ $1 == "--icon" ]]; then
         icon
 fi
