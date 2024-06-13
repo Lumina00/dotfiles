@@ -5,6 +5,7 @@
 (defvar volume-reveal false)
 (defvar brightness-reveal false)
 
+(defpoll time	:interval "1m" "date '+%F %A'")
 (defpoll battery :interval "1m" "scripts/battery --icon")
 (defpoll battery-lvl :interval "30s" "scripts/battery --perc")
 (defpoll brightness-lvl :interval "3s" "scripts/backlight --get")
@@ -38,12 +39,7 @@
 		(button 
 			:class "app-launcher" 
 			:tooltip "Open Application Launcher" 
-			:onclick "scripts/launch-apps -l" "󱓞"
-		)
-    	(button 
-			:class "open-term" 
-			:tooltip "Open Terminal." 
-			:onclick "scripts/launch-apps -t" ""
+			:onclick "wofi --show drun" "󱓞"
 		)
 	)
 )
@@ -57,6 +53,7 @@
 		(label 
 			:class "time"
 			:text {formattime(EWW_TIME, "%H:%M", "Asia/Tokyo")}
+			:tooltip time
 		)
 	)
 )
@@ -292,9 +289,9 @@
 	:geometry 
 		(geometry 
 			:x "0%" 
-			:y "-10px" 
+			:y "0px" 
 			:width "158%" 
-			:height "55px" 
+			:height "50px" 
 			:anchor "bottom center"
 		)
 	:stacking "fg"
