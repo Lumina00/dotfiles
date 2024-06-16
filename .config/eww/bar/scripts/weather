@@ -1,0 +1,115 @@
+#!/bin/ruby 
+
+require 'open-uri'
+require 'json'
+
+def get_data
+
+  city = ""
+  key = ""
+  path = "/tmp/weather"
+  #url = "http://api.openweathermap.org/data/2.5/weather?q=#{city}&appid=#{key}&units=metric"
+  begin 
+    json = URI.open("http://api.openweathermap.org/data/2.5/weather?q=#{city}&appid=#{key}&units=metric").read
+    #html = URI.open(url)
+  rescue => e
+    puts "Error: #{e.message}"
+  end
+
+  data = JSON.parse(json)
+
+  main = data['weather'][0]['description']
+  icon = data['weather'][0]['icon']
+  temp = data['main']['temp']
+  temp = temp.to_s + "℃ "
+
+  case icon
+  when "50d"
+    icon=" "
+  when "50n"
+    icon=" "
+  when "01d"
+   icon=" "
+  when "01n"
+    icon=" "
+  when "02d"
+    icon=" "
+  when "02n"
+    icon=" "
+  when "03d"
+    icon=" "
+  when "03n"
+    icon=" "
+  when "04d"
+    icon=" "
+  when "04n"
+    icon=" "
+  when "09d"
+    icon=" "
+  when "09n"
+    icon=" "
+  when "10d"
+    icon=" "
+  when "10n"
+    icon=" "
+  when "11d"
+    icon=""
+  when "11n"
+    icon=""
+  when "13d"
+    icon=" "
+  when "13n"
+    icon=" "
+  when "40d"
+    icon=" "
+  when "40n"
+    icon=" "
+  else 
+    icon=" "
+  end
+
+  unless File.directory?(path)
+    Dir.mkdir(path)
+  end
+
+  file_main = open(path+'/main',"w") do |f|
+    f.write(main)
+  end
+
+  file_temp = open(path+'/temp',"w") do |f|
+    f.write(temp)
+  end
+
+  file_icon = open(path+'/icon',"w") do |f|
+    f.write(icon)
+  end
+end
+
+def get_time(data)
+  path = "/tmp/weather/#{data}"
+  if File.exist?(path)
+    modifytime = File.stat(path).mtime 
+    time_diff = Time.now - modifytime 
+    if time_diff >= 900
+      get_data()
+      get_time(data)
+    else 
+      cache = open(path,"r").read 
+      puts cache
+    end 
+  else 
+    get_data()
+    get_time(data)
+  end 
+end
+
+url = ARGV[0]
+
+case url
+when "--icon"
+  get_time("icon")
+when "--main"
+  get_time("main")
+when "--temp"
+  get_time("temp")
+end
