@@ -20,7 +20,7 @@ get_icon() {
         echo ""
       elif [ "$BATVAL" -gt 25 ] && [ "$BATVAL" -le 50 ];then
         echo ""
-      elif [ "$BATVAL" -gt 10 ] && [ "$BATVAL" -le 25 ];then
+      elif [ "$BATVAL" -gt 1 ] && [ "$BATVAL" -le 25 ];then
         echo ""
       fi
      else

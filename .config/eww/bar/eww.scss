@@ -1,5 +1,7 @@
 $bg: #232634;
+//$bg: #171B20;
 $bg-alt: #292c3c;
+//$bg-alt: #21262e;
 $fg: #cdd6f4;
 $fg-alt: #bac2de;
 $red: #e78284;
@@ -33,7 +35,6 @@ $gray-alt: #5b6078;
   border-radius: 15px;
 }
 
-
 .app-launcher {
   font-family: "Material Design Icons Desktop";
   font-size: 24px;
@@ -42,6 +43,7 @@ $gray-alt: #5b6078;
   border-radius: 10px;
   color: $purple;
 }
+
 .music-box {
   font-family: "Proxima Nova";
   font-weight: bold;
@@ -91,6 +93,7 @@ $gray-alt: #5b6078;
 }
 
 .brightness-icon {
+    
 	font-family: "Material Design Icons Desktop";
 	font-size: 22px;
 	color: $yellow;
@@ -111,6 +114,7 @@ $gray-alt: #5b6078;
 }
 
 .volume-icon {
+
   font-family: "Favorites";
   font-size: 22px;
   color: $green;
@@ -154,4 +158,18 @@ $gray-alt: #5b6078;
 	color: $yellow;
 	margin-left: 10px;
 	margin-right: 7px;
+}
+.weather-icon {
+  font-family: "Material Design Icons Desktop";
+  font-size: 22px;
+  color: $blue;
+  margin-left: 10px;
+  margin-right: 2px;
+}
+.weather-text {
+  font-family: "Proxima Nova";
+//  font-weight: bold;
+//  padding: 0px 10px 0px 0px;
+//  color: $red;
+  font-size: 22px;
 }

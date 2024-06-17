@@ -266,7 +266,8 @@
 				:duration "350ms"
         		(label 
 					:class "weather-label" 
-					:text "${weather-stat}")
+					:text "${weather-stat}"
+				)
 			)
 		)
  	)

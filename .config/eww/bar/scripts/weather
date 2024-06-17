@@ -4,7 +4,6 @@ require 'open-uri'
 require 'json'
 
 def get_data
-
   city = ""
   key = ""
   path = "/tmp/weather"
@@ -20,7 +19,7 @@ def get_data
 
   main = data['weather'][0]['description']
   icon = data['weather'][0]['icon']
-  temp = data['main']['temp']
+  temp = data['main']['temp'].round(1)
   temp = temp.to_s + "℃ "
 
   case icon
@@ -103,9 +102,9 @@ def get_time(data)
   end 
 end
 
-url = ARGV[0]
+command = ARGV[0]
 
-case url
+case command
 when "--icon"
   get_time("icon")
 when "--main"
