@@ -169,7 +169,7 @@
 				:reveal brightness-reveal :duration "350ms"
         		(scale 
 					:class "brightness-scale"
-					:width 200 
+					:width 100 
 					:active true 
 					:value brightness-lvl 
 					:min 0 
@@ -272,14 +272,13 @@
 		)
  	)
 )
-
 (defwidget end []
 	(box 
 		:orientation "h"
-    		:space-evenly false
-    		:halign "end"
-    		:class "center-modules"
-    		(systray)
+    	:space-evenly false
+    	:halign "end"
+    	:class "center-modules"
+			(systray)
 			(weather)
     		(bluetooth)
     		(volume)
@@ -312,7 +311,8 @@
 (defwidget bar-stuff []
 	(box 
 		:class "bar-class"
-			:orientation "h"
+		:orientation "h"
+		:space-evenly true
     		(start)
 			(center)
     		(end)

@@ -1,6 +1,7 @@
 $bg: #232634;
 //$bg: #171B20;
-$bg-alt: #292c3c;
+//$bg-alt: #292c3c;
+$bg-alt: #352c3c;
 //$bg-alt: #21262e;
 $fg: #cdd6f4;
 $fg-alt: #bac2de;
@@ -159,10 +160,16 @@ $gray-alt: #5b6078;
 	margin-left: 10px;
 	margin-right: 7px;
 }
+.weather-box {
+  border-radius: 30%;
+  border: 10px;
+//  background-color: $bg-alt;
+
+}
 .weather-icon {
   font-family: "Material Design Icons Desktop";
   font-size: 22px;
-  color: $blue;
+  color: #e6e6fa;
   margin-left: 10px;
   margin-right: 2px;
 }
@@ -170,6 +177,6 @@ $gray-alt: #5b6078;
   font-family: "Proxima Nova";
 //  font-weight: bold;
 //  padding: 0px 10px 0px 0px;
-//  color: $red;
   font-size: 22px;
+  color: #e6e6fa;
 }
