@@ -1,4 +1,3 @@
-;; =================== VARS =====================
 (defvar bat-reveal false)
 (defvar wifi-reveal false)
 (defvar bluetooth-reveal false)
@@ -8,8 +7,9 @@
 
 (defpoll time	:interval "1m" "date '+%F %A'")
 (defpoll battery :interval "1m" "scripts/battery --icon")
-(defpoll battery-lvl :interval "30s" "scripts/battery --perc")
-(defpoll brightness-lvl :interval "3s" "scripts/backlight --get")
+(defpoll battery-lvl :interval "1m" "scripts/battery --perc")
+(defpoll brightness-lvl :interval "250ms" :run-while brightness-reveal "scripts/backlight --get")
+(defpoll volume-lvl :interval "250ms" :run-while volume-reveal "scripts/audio --get-vol")
 (defpoll bluetooth :interval "30s" "scripts/bluetooth --icon")
 (defpoll bluetooth-state :interval "30s" "scripts/bluetooth --state")
 (defpoll ssid :interval "3m" "scripts/network --state")
@@ -21,7 +21,6 @@
 (defpoll weather-temp :interval "15m" "scripts/weather --temp")
 (defpoll weather-stat :interval "15m" "scripts/weather --main")
 
-(deflisten volume-lvl :initial "0" "scripts/audio --get-vol")
 
 (defwidget sep []
 	(box 
