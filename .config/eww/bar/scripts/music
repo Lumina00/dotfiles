@@ -38,7 +38,7 @@ get_song-artist() {
 	if [[ -z "$song" ]] | [[ -z "$artist" ]]; then
 		echo ""
 	else
-		echo "$artist" "-" "$song"
+		echo "$song" "-" "$artist"
 		
 	fi	
 }

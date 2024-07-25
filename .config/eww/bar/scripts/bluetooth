@@ -32,7 +32,7 @@ state() {
                         DEVICE=`echo info | bluetoothctl | grep 'Alias:' | awk -F:  '{ print $2 }'`
                         BATTERY=`upower -i /org/freedesktop/UPower/devices/headset_dev_33_33_55_33_90_D0 | grep percentage | cut -b 26-28`
 						if [ -z "$DEVICE"]; then 
-							echo "No_Devices"
+							echo "No Devices"
 						else
 							echo "$DEVICE ($BATTERY)"
 						fi

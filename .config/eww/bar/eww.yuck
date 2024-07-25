@@ -9,9 +9,9 @@
 (defpoll battery :interval "1m" "scripts/battery --icon")
 (defpoll battery-lvl :interval "1m" :run-while bat-reveal "scripts/battery --perc")
 (defpoll brightness-lvl :interval "250ms" :run-while brightness-reveal "scripts/backlight --get")
-(defpoll volume-lvl :interval "250ms" :run-while volume-reveal "scripts/audio --get-vol")
+(defpoll volume-lvl :interval "250ms" :run-while volume-reveal "pamixer --get-volume")
 (defpoll bluetooth :interval "30s" "scripts/bluetooth --icon")
-(defpoll bluetooth-state :interval "30s" "scripts/bluetooth --state")
+(defpoll bluetooth-state :interval "5s" :run-while bluetooth-reveal "scripts/bluetooth --state")
 (defpoll ssid :interval "5s" :run-while wifi-reveal "scripts/network --state")
 (defpoll wifi-icon :interval "30s" "scripts/network --icon")
 (defpoll SONG :interval "7s"	"scripts/music --song")
@@ -207,7 +207,7 @@
 					:min 0 
 					:max 101 
 					:orientation "h" 
-					:onchange "pactl set-sink-volume @DEFAULT_SINK@ {}%"
+					:onchange "pamixer --set-volume {}"
 				)
 			)
 		)
@@ -229,7 +229,7 @@
 				:text bluetooth
 			)
       		(revealer 
-				:transition "slideright" 
+				:transition "slideleft" 
 				:reveal bluetooth-reveal 
 				:duration "350ms"
 				(label 
