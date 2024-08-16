@@ -10,8 +10,9 @@ image_default = [
   { command = "qimgv", args = [
     "--",
   ], fork = true, silent = true },
-  { command = "krita", args = [
-    "--",
+  { command = "imv", args = [
+    "-f",
+	"--",
   ], fork = true, silent = true },
   { command = "exiftool", pager = true },
   { command = "swappy", args = [
