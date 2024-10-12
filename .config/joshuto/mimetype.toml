@@ -10,8 +10,8 @@ image_default = [
   { command = "qimgv", args = [
     "--",
   ], fork = true, silent = true },
-  { command = "imv", args = [
-    "-f",
+  { command = "photoqt", args = [
+	".",
 	"--",
   ], fork = true, silent = true },
   { command = "exiftool", pager = true },
@@ -50,15 +50,20 @@ libreoffice_default = [{ command = "libreoffice", fork = true, silent = true }]
 avif.inherit = "image_default"
 bmp.inherit = "image_default"
 gif.inherit = "image_default"
+GIF.inherit = "image_default"
 heic.inherit = "image_default"
 jpeg.inherit = "image_default"
+JPEG.inherit = "image_default"
 jpe.inherit = "image_default"
 jpg.inherit = "image_default"
+JPG.inherit = "image_default"
 jxl.inherit = "image_default"
 pgm.inherit = "image_default"
 png.inherit = "image_default"
+PNG.inherit = "image_default"
 ppm.inherit = "image_default"
 webp.inherit = "image_default"
+WEBP.inherit = "image_default"
 
 svg.app_list = [
   { command = "inkview", fork = true, silent = true },
@@ -222,7 +227,7 @@ tex.app_list = [
   { command = "pdflatex" },
 ]
 
-torrent.app_list = [{ command = "qbittorrent" }]
+bittorrent.app_list = [{ command = "qbittorrent" }]
 
 [mimetype]
 

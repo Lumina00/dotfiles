@@ -1,31 +1,37 @@
 #!/bin/bash
 
+BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1)
+BATSTATUS="$(cat /sys/class/power_supply/${BAT}/status)"
+BATVAL="$(cat /sys/class/power_supply/${BAT}/capacity)"
 
 ## Get Battery 
 get_percentage() {
-    BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1)
     echo "$(cat /sys/class/power_supply/${BAT}/capacity)%"
 }
 
 ## Get Battery Icon
 get_icon() {
-    BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1)
-    BATSTATUS="$(cat /sys/class/power_supply/${BAT}/status)"
-    BATVAL="$(cat /sys/class/power_supply/${BAT}/capacity)"
 
-    if [[ "$BATSTATUS" == "Discharging" ]];then
+    if [[ "$BATSTATUS" == "Discharging" ]] || [[ "$BATSTATUS" == "Not charging" ]]; then
       if [ "$BATVAL" -gt 75 ] && [ "$BATVAL" -le 101 ];then
         echo ""
       elif [ "$BATVAL" -gt 50 ] && [ "$BATVAL" -le 75 ];then
         echo ""
-      elif [ "$BATVAL" -gt 25 ] && [ "$BATVAL" -le 50 ];then
+      elif [ "$BATVAL" -gt 35 ] && [ "$BATVAL" -le 50 ];then
         echo ""
-      elif [ "$BATVAL" -gt 1 ] && [ "$BATVAL" -le 25 ];then
-        echo ""
+      elif [ "$BATVAL" -gt 1 ] && [ "$BATVAL" -le 35 ];then
+        echo "" 
+		low_battery
       fi
      else
       echo ""
     fi
+}
+
+low_battery() {
+	if [[ "$BATSTATUS" != "Charging" ]]; then
+		notify-send -u critical -c im "Low Battery"
+	fi
 }
 
 
