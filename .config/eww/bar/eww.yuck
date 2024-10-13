@@ -277,32 +277,34 @@
     	:space-evenly false
     	:halign "end"
     	:class "center-modules"
-			(systray)
-			(weather)
-    		(bluetooth)
-    		(volume)
-    		(brightness)
-    		(wifi)
-    		(battery)
-    		(sep)
-    		(clock)
+		:anchor "bottom left"
+		(systray)
+		(weather)
+    	(bluetooth)
+    	(volume)
+    	(brightness)
+    	(wifi)
+    	(battery)
+    	(sep)
+    	(clock)
 	)
 )
 
 (defwidget start []
-	(box :orientation "h"
-    	:space-evenly false
+	(box 
+		:orientation "h"
     	:halign "start"
     	:class "start-modules"
-    	(left)
+;;    	(left)
 	)
 )
 
 (defwidget center []
 	(box 
 		:orientation "h"
-		:halign "center"
+		:halign "end"
 		:class "center"
+		:space-evenly false
 		(music)
 	)
 )
@@ -311,10 +313,9 @@
 	(box 
 		:class "bar-class"
 		:orientation "h"
-		:space-evenly true
-    		(start)
-			(center)
-    		(end)
+;;    	(start)
+		(center)
+    	(end)
 	)
 )
 
@@ -325,7 +326,7 @@
 		(geometry 
 			:x "0%" 
 			:y "0px" 
-			:width "158%" 
+			:width "100%" 
 			:height "50px" 
 			:anchor "bottom center"
 		)
