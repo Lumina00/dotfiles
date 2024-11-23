@@ -228,6 +228,7 @@ tex.app_list = [
 ]
 
 bittorrent.app_list = [{ command = "qbittorrent" }]
+exe.app_list = [{ command = "wine" }]
 
 [mimetype]
 

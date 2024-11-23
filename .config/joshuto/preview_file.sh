@@ -75,7 +75,7 @@ handle_extension() {
             7z l -ba -p -- "${FILE_PATH}" | grep -oP '\S+$' && exit 0
             exit 1 ;;
 			
-			tar|tar.xz|tar.gz|tgz|txz|tbz2|tlz|tZ|tzo) 
+			tar|tar.xz|tar.gz|tar.bz|tgz|txz|tbz2|tlz|tZ|tzo) 
 			tar tf "${FILE_PATH}" && exit 0
 			exit 1 ;;
 
