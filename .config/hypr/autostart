@@ -12,7 +12,8 @@ dunst &
 
 
 # wallpaper
-$scripts/wallpaper $config/wallpapers/5.png &
+$scripts/wallpaper $config/wallpapers/4.jpg &
+$scripts/tools/dynamic &
 
 # other
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1

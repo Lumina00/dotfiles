@@ -7,7 +7,7 @@ icon() {
                 echo "󰂲"
         else
                 # connected, but no device
-                if [ $(echo info | bluetoothctl | grep 'Device' | wc -c) -eq 0 ]; then
+                if [ $(bluetoothctl info | grep 'Device' | wc -c) -eq 0 ]; then
                         #     echo $HOME/.local/icons/bluetooth-on.svg
                         echo "󰂯"
                 else
@@ -29,12 +29,12 @@ state() {
                         echo "Connected"
                 else
                         # get device alias
-                        DEVICE=`echo info | bluetoothctl | grep 'Alias:' | awk -F:  '{ print $2 }'`
-                        BATTERY=`upower -i /org/freedesktop/UPower/devices/headset_dev_33_33_55_33_90_D0 | grep percentage | cut -b 26-28`
+						DEVICE="$(bluetoothctl info | grep 'Alias:' | awk -F:  '{ print $2 }')"
+						BATTERY="$(bluetoothctl info | tail -1 | sed -n 's/.*(\([0-9]\+\)).*/\1/p')"
 						if [ -z "$DEVICE" ]; then 
 							echo "No Devices"
 						else
-							echo "$DEVICE ($BATTERY)"
+							echo "$DEVICE $BATTERY%"
 						fi
 
                 fi
