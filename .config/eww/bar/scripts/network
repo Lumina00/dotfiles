@@ -3,23 +3,35 @@
 wifi=$(awk 'NR==3 {printf("%.0f",$3*10/7)}' /proc/net/wireless)
 ssid=$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d\: -f2)
 wired=$(nmcli -t -f NAME connection show --active | grep "Wired" | cut -d\: -f2)
-vpn=$(nmcli con show --active | grep -i 'vpn' | awk '{print $1}')
-status=false
+bluetooth=$(nmcli con show --active | grep bluetooth)
+vpn=$(nmcli con show --active | grep -e vpn -e wireguard | awk '{print $1}')
+
+wiredstatus=false
+bluetoothstatus=false
 
 connect() {
 	isWiredconnect
+	isBluetoothconnect
 	isWificonnect
 }
 
 isWiredconnect() {
 	if [[ -n "$wired" ]]; then
-		status=true
+		wiredstatus=true
 	fi
 }
-
+isBluetoothconnect() {
+	if [[ -n "$bluetooth" ]]; then
+		bluetoothstatus=true 
+	fi 
+}
 isWificonnect() {
-	if [[ $status == "true" ]]; then
+	if [[ $wiredstatus == "true" ]]; then
 		echo "Ethernet"
+		return 0
+	
+	elif [[ $bluetoothstatus == "true" ]]; then
+		echo "Bluetooth"
 		return 0
 	fi
 
@@ -33,8 +45,10 @@ isWificonnect() {
 icon() {
 	isWiredconnect
 
-	if [[ "$status" == true ]]; then
+	if [[ "$wiredstatus" == "true" ]]; then
 		echo ""
+	elif [[ "$bluetoothstatus" == "true" ]]; then
+		echo "󰂴"
 	elif [[ "$wifi" -ge "75" ]]; then
 		echo "󰤨"
     elif [[ "$wifi" -ge "50" ]] && [[ "$wifi" -lt "75" ]]; then
