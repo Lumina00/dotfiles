@@ -19,7 +19,7 @@ cp -r .config ~/
 sudo cp linux-lts.preset /etc/mkinitcpio.d/linux-lts.preset
 sudo \cp -f cmdline /etc/kernel/cmdline 
 sudo cp mkinitcpio.conf /etc/mkinitcpio.conf
-sudo \cp -f config.ini /etc/ly/
+cat config.ini | sudo tee /etc/ly/config.ini
 cd $shell
 $shell/network.sh $dot $1 $2 
 $shell/firefox.sh $dot

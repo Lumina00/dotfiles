@@ -10,9 +10,12 @@ fi
 if [ -d "$HOME/.cargo/bin" ] ;
 	then PATH="$HOME/.cargo/bin:$PATH"
 fi
+
 export EDITOR=/usr/bin/nvim
 export PAGER=less
+#export WINEPREFIX=~/.wine-appimage-stable
 
+#[ "$TERM" = "xterm-kitty" ] && alias ssh = "kitty +kitten ssh"
 source ~/.local/share/zinit/zinit.git/zinit.zsh
 
 autoload -Uz _zinit
@@ -54,7 +57,6 @@ alias pacman='sudo pacman --color auto'
 alias df='df -h'
 alias fdisk='sudo fdisk -l'
 alias ssn="sudo shutdown now"
-alias sr="sudo reboot"
 alias ctl="sudo systemctl"
 alias dd='sudo dd status=progress'
 alias umount='sudo umount -l'
@@ -169,4 +171,11 @@ ex() {
 			done
 		fi
 	done
+}
+sr() { 
+	if [ -s "/usr/lib/modules/$(uname -r)/pkgbase" ]; then
+		sudo systemctl soft-reboot 
+	else 
+		sudo reboot 
+	fi
 }
