@@ -3,5 +3,3 @@
 ## eww
 
 * dashboard  
-* ~~bar->music~~    
-* ~~weather~~

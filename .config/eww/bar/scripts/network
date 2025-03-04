@@ -1,31 +1,34 @@
 #!/bin/bash
 
-wifi=$(awk 'NR==3 {printf("%.0f",$3*10/7)}' /proc/net/wireless)
-ssid=$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d\: -f2)
-wired=$(nmcli -t -f NAME connection show --active | grep "Wired" | cut -d\: -f2)
-bluetooth=$(nmcli con show --active | grep bluetooth)
+WiFiSignal=$(awk 'NR==3 {printf("%.0f",$3*10/7)}' /proc/net/wireless)
 vpn=$(nmcli con show --active | grep -e vpn -e wireguard | awk '{print $1}')
 
 wiredstatus=false
 bluetoothstatus=false
 
+connection() {
+	nm=$(nmcli con show --active | grep $1 | awk '{print $1}')
+	echo ${nm} 
+}
 connect() {
 	isWiredconnect
 	isBluetoothconnect
-	isWificonnect
+	iswificonnect
 }
 
 isWiredconnect() {
+	local wired=$(connection wired)
 	if [[ -n "$wired" ]]; then
 		wiredstatus=true
 	fi
 }
 isBluetoothconnect() {
+	local bluetooth=$(connection bluetooth)
 	if [[ -n "$bluetooth" ]]; then
 		bluetoothstatus=true 
 	fi 
 }
-isWificonnect() {
+iswificonnect() {
 	if [[ $wiredstatus == "true" ]]; then
 		echo "Ethernet"
 		return 0
@@ -35,36 +38,16 @@ isWificonnect() {
 		return 0
 	fi
 
-	if [[ -z "$ssid" ]]; then
+	local wifi=$(connection wifi)
+	if [[ -z "$wifi" ]]; then
 		echo "Disconnected"
 	else 
-		echo ${ssid}
+		echo ${wifi}
 	fi
-}
-
-icon() {
-	isWiredconnect
-
-	if [[ "$wiredstatus" == "true" ]]; then
-		echo ""
-	elif [[ "$bluetoothstatus" == "true" ]]; then
-		echo "󰂴"
-	elif [[ "$wifi" -ge "75" ]]; then
-		echo "󰤨"
-    elif [[ "$wifi" -ge "50" ]] && [[ "$wifi" -lt "75" ]]; then
-        echo "󰤥"
-    elif [[ "$wifi" -ge "25" ]] && [[ "$wifi" -lt "50" ]]; then
-        echo "󰤢"
-    elif [[ "$wifi" -ge "1" ]] && [[ "$wifi" -lt "25" ]]; then
-        echo "󰤟"
-    else
-        echo "󰤮"
-    fi
 }
 
 vpn () {
 	isVPNconnect 
-
 }
 
 isVPNconnect () {
@@ -72,6 +55,26 @@ isVPNconnect () {
 		echo $vpn
 	fi
 }
+icon() {
+	isWiredconnect
+
+	if [[ "$wiredstatus" == "true" ]]; then
+		echo ""
+	elif [[ "$bluetoothstatus" == "true" ]]; then
+		echo "󰂴"
+	elif [[ "$WiFiSignal" -ge "75" ]]; then
+		echo "󰤨"
+    elif [[ "$WiFiSignal" -ge "50" ]] && [[ "$WiFiSignal" -lt "75" ]]; then
+        echo "󰤥"
+    elif [[ "$WiFiSignal" -ge "25" ]] && [[ "$WiFiSignal" -lt "50" ]]; then
+        echo "󰤢"
+    elif [[ "$WiFiSignal" -ge "1" ]] && [[ "$WiFiSignal" -lt "25" ]]; then
+        echo "󰤟"
+    else
+        echo "󰤮"
+    fi
+}
+
 
 if [[ $1 = "--state" ]]; then
     connect
