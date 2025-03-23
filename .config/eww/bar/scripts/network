@@ -10,6 +10,7 @@ connection() {
 	nm=$(nmcli con show --active | grep $1 | awk '{print $1}')
 	echo ${nm} 
 }
+
 connect() {
 	isWiredconnect
 	isBluetoothconnect
@@ -22,12 +23,14 @@ isWiredconnect() {
 		wiredstatus=true
 	fi
 }
+
 isBluetoothconnect() {
 	local bluetooth=$(connection bluetooth)
 	if [[ -n "$bluetooth" ]]; then
 		bluetoothstatus=true 
 	fi 
 }
+
 iswificonnect() {
 	if [[ $wiredstatus == "true" ]]; then
 		echo "Ethernet"
@@ -53,8 +56,12 @@ vpn () {
 isVPNconnect () {
 	if [ -n "$vpn" ]; then 
 		echo $vpn
+	else 
+		echo "Disconnected"
 	fi
+
 }
+
 icon() {
 	isWiredconnect
 
