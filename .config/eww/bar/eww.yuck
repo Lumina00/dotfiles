@@ -1,28 +1,3 @@
-(defvar bat-reveal false)
-(defvar wifi-reveal false)
-(defvar bluetooth-reveal false)
-(defvar volume-reveal false)
-(defvar brightness-reveal false)
-(defvar weather-reveal false)
-
-(defpoll time	:interval "15s" "date '+%F %A'")
-(defpoll battery :interval "1m" "scripts/battery --icon")
-(defpoll battery-lvl :interval "1m" :run-while bat-reveal "scripts/battery --perc")
-(defpoll brightness-lvl :initial "0" :interval "250ms" :run-while brightness-reveal "scripts/backlight --get")
-(defpoll volume-lvl :initial "0" :interval "250ms" :run-while volume-reveal "pamixer --get-volume")
-(defpoll bluetooth :interval "30s" "scripts/bluetooth --icon")
-(defpoll bluetooth-state :interval "5s" :run-while bluetooth-reveal "scripts/bluetooth --state")
-(defpoll ssid :interval "5s" :run-while wifi-reveal "scripts/network --state")
-(defpoll wifi-icon :interval "30s" "scripts/network --icon")
-(defpoll SONG :interval "7s" "scripts/music --song")
-;; (defpoll ARTIST :interval "7s"	"scripts/music --artist")
-(defpoll song_perc	:initial "0" :interval "2s" "scripts/music --perc")
-(defpoll weather-icon :interval "5m" "scripts/weather --icon")
-(defpoll weather-temp :initial "" :interval "5m" "scripts/weather --temp")
-(defpoll weather-stat :initial "" :interval "5m" :run-while weather-reveal "scripts/weather --main")
-
-
-
 (defwidget sep []
 	(box 
 		:class "seperator-box" 
@@ -73,7 +48,7 @@
 				:space-evenly "false"
 				(circular-progress
 					:class "music-progress"
-					:value	song_perc
+					:value "${music[2]}"
 					:thickness 10 
 				)
 				(button 
@@ -84,8 +59,8 @@
 						:class "song"
 						:halign "start"
 						:wrap "false"
-						:text SONG
-						:tooltip SONG 
+						:text "${music[0]}"
+						:tooltip "${music[0]}" 
 					)
 				)
 				;;(label 
@@ -101,8 +76,8 @@
 
 (defwidget battery []
 	(eventbox 
-  		:onhover "/usr/bin/eww -c $HOME/.config/eww/bar/ update bat-reveal=true"
-    	:onhoverlost "/usr/bin/eww -c $HOME/.config/eww/bar/ update bat-reveal=false"
+  		:onhover "/usr/bin/eww -c $HOME/.config/eww/ update bat-reveal=true"
+    	:onhoverlost "/usr/bin/eww -c $HOME/.config/eww/ update bat-reveal=false"
     	(box 
 			:class "battery-box" 
 			:orientation "h" 
@@ -111,7 +86,7 @@
 			:hexpand "false"
       		(label 
 				:class "bat-icon" 
-				:text battery
+				:text "${battery[1]}"
 			)
       		(revealer 
 				:transition "slideright" 
@@ -119,7 +94,7 @@
 				:duration "350ms"
         		(label 
 					:class "bat-label" 
-					:text "${battery-lvl}")
+					:text "${battery[0]}")
 			)
 		)
  	)
@@ -127,8 +102,8 @@
 
 (defwidget wifi []
 	(eventbox 
-  		:onhover "/usr/bin/eww -c $HOME/.config/eww/bar/ update wifi-reveal=true"
-    	:onhoverlost "/usr/bin/eww -c $HOME/.config/eww/bar/ update wifi-reveal=false"
+  		:onhover "/usr/bin/eww -c $HOME/.config/eww/ update wifi-reveal=true"
+    	:onhoverlost "/usr/bin/eww -c $HOME/.config/eww/ update wifi-reveal=false"
     	(box 
 			:class "wifi-box" 
 			:orientation "h" 
@@ -137,15 +112,15 @@
 			:hexpand "false"
       		(label 
 				:class "wifi-icon" 
-				:text wifi-icon
+				:text "${network[1]}"
 			)
       		(revealer 
-				:transition "slideright" 
+				:transition "slideleft" 
 				:reveal wifi-reveal 
 				:duration "350ms"
         		(label 
 					:class "wifi-label" 
-					:text ssid
+					:text "${network[0]}"
 				)
 			)
 		)
@@ -154,8 +129,8 @@
 
 (defwidget brightness []
   	(eventbox 
-		:onhover "/usr/bin/eww -c $HOME/.config/eww/bar/ update brightness-reveal=true"
-    	:onhoverlost "/usr/bin/eww -c $HOME/.config/eww/bar/ update brightness-reveal=false"
+		:onhover "/usr/bin/eww -c $HOME/.config/eww/ update brightness-reveal=true"
+    	:onhoverlost "/usr/bin/eww -c $HOME/.config/eww/ update brightness-reveal=false"
     	(box 
 			:class "brightness-box" 
 			:orientation "h" 
@@ -168,7 +143,8 @@
 			)
       		(revealer 
 				:transition "slideright" 
-				:reveal brightness-reveal :duration "350ms"
+				:reveal brightness-reveal 
+				:duration "350ms"
         		(scale 
 					:class "brightness-scale"
 					:width 100 
@@ -186,8 +162,8 @@
 
 (defwidget volume []
   	(eventbox 
-		:onhover "/usr/bin/eww -c $HOME/.config/eww/bar/ update volume-reveal=true"
-    	:onhoverlost "/usr/bin/eww -c $HOME/.config/eww/bar/ update volume-reveal=false"
+		:onhover "/usr/bin/eww -c $HOME/.config/eww/ update volume-reveal=true"
+    	:onhoverlost "/usr/bin/eww -c $HOME/.config/eww/ update volume-reveal=false"
     	(box 
 			:class "volume-box" 
 			:orientation "h" 
@@ -219,8 +195,8 @@
 
 (defwidget bluetooth []
 	(eventbox 
-		:onhover "/usr/bin/eww -c $HOME/.config/eww/bar/ update bluetooth-reveal=true"
-    	:onhoverlost "/usr/bin/eww -c $HOME/.config/eww/bar/ update bluetooth-reveal=false"
+		:onhover "/usr/bin/eww -c $HOME/.config/eww/ update bluetooth-reveal=true"
+    	:onhoverlost "/usr/bin/eww -c $HOME/.config/eww/ update bluetooth-reveal=false"
 		(box 
 			:class "bluetooth-box" 
 			:orientation "h" 
@@ -229,7 +205,7 @@
 			:hexpand "false"
       		(label 
 				:class "bluetooth-icon" 
-				:text bluetooth
+				:text "${bluetooth[1]}"
 			)
       		(revealer 
 				:transition "slideleft" 
@@ -237,7 +213,7 @@
 				:duration "350ms"
 				(label 
 					:class "bluetooth-label" 
-					:text bluetooth-state 
+					:text "${bluetooth[0]}"
 				)
 			)
 		)
@@ -246,8 +222,8 @@
 
 (defwidget weather []
 	(eventbox 
-  		:onhover "/usr/bin/eww -c $HOME/.config/eww/bar/ update weather-reveal=true"
-    	:onhoverlost "/usr/bin/eww -c $HOME/.config/eww/bar/ update weather-reveal=false"
+  		:onhover "/usr/bin/eww -c $HOME/.config/eww/ update weather-reveal=true"
+    	:onhoverlost "/usr/bin/eww -c $HOME/.config/eww/ update weather-reveal=false"
     	(box 
 			:class "weather-box" 
 			:orientation "h" 
@@ -256,11 +232,11 @@
 			:hexpand "false"
       		(label 
 				:class "weather-icon" 
-				:text weather-icon
+				:text "${weather[2]}"
 			)
 			(label 
 				:class "weather-text"
-				:text weather-temp 
+				:text "${weather[1]}"
 			)
       		(revealer 
 				:transition "slideright" 
@@ -268,7 +244,7 @@
 				:duration "350ms"
         		(label 
 					:class "weather-label" 
-					:text "${weather-stat}"
+					:text "${weather[0]}"
 				)
 			)
 		)
@@ -316,7 +292,7 @@
 		:class "bar-class"
 		:orientation "h"
     	(start)
-		(center)
+		;;(center)
     	(end)
 	)
 )
@@ -329,7 +305,7 @@
 			:x "0%" 
 			:y "0px" 
 			:width "100%" 
-			:height "50px" 
+			:height "20px" 
 			:anchor "bottom center"
 		)
 	:stacking "fg"
