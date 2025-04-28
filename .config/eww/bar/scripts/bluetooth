@@ -40,9 +40,18 @@ state() {
                 fi
         fi
 }
-
+toggle() {
+	if [ $(bluetoothctl show | grep PowerState\: | awk '{print $2}') == "on" ]; then 
+		bluetoothctl power off 
+	else 
+		bluetoothctl power on 
+	fi
+}
+	
 if [[ $1 == "--state" ]]; then
         state
 elif [[ $1 == "--icon" ]]; then
         icon
+elif [[ $1 == "--toggle" ]]; then
+		toggle
 fi
