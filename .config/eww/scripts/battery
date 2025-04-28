@@ -4,14 +4,7 @@ BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1)
 BATSTATUS="$(cat /sys/class/power_supply/${BAT}/status)"
 BATVAL="$(cat /sys/class/power_supply/${BAT}/capacity)"
 
-## Get Battery 
-get_percentage() {
-    echo "$(cat /sys/class/power_supply/${BAT}/capacity)%"
-}
-
-## Get Battery Icon
 get_icon() {
-
     if [[ "$BATSTATUS" == "Discharging" ]] || [[ "$BATSTATUS" == "Not charging" ]]; then
       if [ "$BATVAL" -gt 75 ] && [ "$BATVAL" -le 101 ];then
         echo ""
@@ -34,10 +27,5 @@ low_battery() {
 	fi
 }
 
-
-if [[ "$1" == "--perc" ]]; then
-	get_percentage
-elif [[ "$1" == "--icon" ]]; then
-	get_icon
-fi
+echo "[\"$BATVAL%\",\"$(get_icon)\"]"
 

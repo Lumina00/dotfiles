@@ -99,4 +99,6 @@ elif [[ "$1" == "--next" ]]; then
 	{ mpc -q next; }
 elif [[ "$1" == "--prev" ]]; then
 	{ mpc -q prev; }
+else
+	echo "[\"$(get_song)\",\"$(get_artist)\",\"$(get_perc)\""
 fi

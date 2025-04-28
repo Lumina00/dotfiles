@@ -48,10 +48,8 @@ toggle() {
 	fi
 }
 	
-if [[ $1 == "--state" ]]; then
-        state
-elif [[ $1 == "--icon" ]]; then
-        icon
-elif [[ $1 == "--toggle" ]]; then
+if [[ $1 == "--toggle" ]]; then
 		toggle
+	else
+		echo "[\"$(state)\",\"$(icon)\"]"
 fi
