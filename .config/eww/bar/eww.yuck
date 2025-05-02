@@ -151,9 +151,9 @@
 					:active true 
 					:value brightness-lvl 
 					:min 0 
-					:max 256 
+					:max 100 
 					:orientation "h" 
-					:onchange "brightnessctl s {}%"
+					:onchange "brightnessctl set {}%"
 				)
 			)
 		)
@@ -186,7 +186,7 @@
 					:min 0 
 					:max 101 
 					:orientation "h" 
-					:onchange "pamixer --set-volume {}"
+					:onchange "wpctl set-volume @DEFAULT_SINK@ {}%"
 				)
 			)
 		)

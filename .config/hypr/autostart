@@ -5,7 +5,7 @@ config=$HOME/.config/hypr
 scripts=$config/scripts
 
 # notification daemon
-dunst &
+#dunst &
 
 # waybar
 #$scripts/launch_waybar &
@@ -18,7 +18,7 @@ $scripts/tools/dynamic &
 # other
 dbus-update-activation-environment --systemd --all WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
 
-eww -c ~/.config/eww/bar/ open bar
+eww -c ~/.config/eww/ open bar
 kime &
 udiskie & 
 systemctl --user start hypridle hyprpolkitagent

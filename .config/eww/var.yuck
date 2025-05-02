@@ -7,8 +7,8 @@
 
 (defpoll time	:interval "15s" "date '+%F %A'")
 (defpoll battery :interval "1m" :run-while bat-reveal "scripts/battery")
-(defpoll brightness-lvl :initial "0" :interval "250ms" :run-while brightness-reveal "brightnessctl get")
-(defpoll volume-lvl :initial "0" :interval "250ms" :run-while volume-reveal "pamixer --get-volume")
+(defpoll brightness-lvl :interval "250ms" :run-while brightness-reveal "awk -F'[()]' '/Current brightness/ {print $2}'")
+(defpoll volume-lvl :interval "100ms" :run-while volume-reveal "wpctl get-volume @DEFAULT_SINK@ | awk -F'0\\.' '{print $2}'")
 (defpoll bluetooth :interval "30s" "scripts/bluetooth")
 (defpoll network :interval "5s" :run-while wifi-reveal "scripts/network --state")
 (defpoll music :interval "7s" "scripts/music")
