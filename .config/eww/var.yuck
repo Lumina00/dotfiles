@@ -12,4 +12,4 @@
 (defpoll bluetooth :interval "30s" "scripts/bluetooth")
 (defpoll network :interval "5s" :run-while wifi-reveal "scripts/network --state")
 (defpoll music :interval "7s" "scripts/music")
-(defpoll weather :initial "" :interval "10m" :run-while weather-reveal "scripts/weather")
+(defpoll weather :initial "" :interval "5m" :run-while weather-reveal "scripts/weather")

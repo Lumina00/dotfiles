@@ -3,9 +3,10 @@
 require 'open-uri'
 require 'json'
 
+def get_data  
   city = ""
   key = ""
-  path = "/tmp/weather"
+  path = "/tmp"
   #url = "http://api.openweathermap.org/data/2.5/weather?q=#{city}&appid=#{key}&units=metric"
   begin 
     json = URI.open("http://api.openweathermap.org/data/2.5/weather?q=#{city}&appid=#{key}&units=metric").read
@@ -63,49 +64,28 @@ require 'json'
   end
 
   print '["',main,'","',temp,'","',icon,'"]'
-=begin
   unless File.directory?(path)
     Dir.mkdir(path)
   end
 
-  file_main = open(path+'/main',"w") do |f|
-    f.write(main)
-  end
-
-  file_temp = open(path+'/temp',"w") do |f|
-    f.write(temp)
-  end
-
-  file_icon = open(path+'/icon',"w") do |f|
-    f.write(icon)
+  file_main = open(path+'/weather',"w") do |f|
+    f.write("[\"#{main}\",\"#{temp}\",\"#{icon}\"]")
   end
 end
-def get_time(data)
-  path = "/tmp/weather/#{data}"
+def get_time
+  path = "/tmp/weather"
   if File.exist?(path)
     modifytime = File.stat(path).mtime 
     time_diff = Time.now - modifytime 
     if time_diff >= 900
       get_data()
-      get_time(data)
     else 
       cache = open(path,"r").read 
       puts cache
     end 
   else 
     get_data()
-    get_time(data)
   end 
 end
 
-command = ARGV[0]
-
-case command
-when "--icon"
-  get_time("icon")
-when "--main"
-  get_time("main")
-when "--temp"
-  get_time("temp")
-end
-=end
+get_time()
