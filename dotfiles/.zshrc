@@ -86,7 +86,8 @@ alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 alias jctl="journalctl -p 3 -xb"
 
 alias gitdiff="nvim +DiffviewOpen"
-
+alias stop-hypridle="systemctl stop --user hypridle"
+alias restart-hypridle="systemctl restart --user hypridle"
 #nvim ()
 #{
 #  if [ -z $1 ]; then
