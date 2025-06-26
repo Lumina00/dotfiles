@@ -26,6 +26,6 @@ low_battery() {
 		notify-send -u critical -c im "Low Battery"
 	fi
 }
-
+#echo "$(get_icon)  $BATVAL%"
 echo "[\"$BATVAL%\",\"$(get_icon)\"]"
 

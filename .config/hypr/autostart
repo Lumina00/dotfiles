@@ -23,4 +23,3 @@ kime &
 udiskie & 
 systemctl --user start hypridle hyprpolkitagent
 mpd
-

@@ -75,9 +75,9 @@
 )
 
 (defwidget battery []
-	(eventbox 
-  		:onhover "/usr/bin/eww -c $HOME/.config/eww/ update bat-reveal=true"
-    	:onhoverlost "/usr/bin/eww -c $HOME/.config/eww/ update bat-reveal=false"
+	;;(eventbox 
+  	;;	:onhover "/usr/bin/eww -c $HOME/.config/eww/ update bat-reveal=true"
+    ;;	:onhoverlost "/usr/bin/eww -c $HOME/.config/eww/ update bat-reveal=false"
     	(box 
 			:class "battery-box" 
 			:orientation "h" 
@@ -88,16 +88,20 @@
 				:class "bat-icon" 
 				:text "${battery[1]}"
 			)
-      		(revealer 
-				:transition "slideright" 
-				:reveal bat-reveal 
-				:duration "350ms"
-        		(label 
-					:class "bat-label" 
-					:text "${battery[0]}")
+      		(label 
+				:class "bat-label" 
+				:text "${battery[0]}"
 			)
-		)
- 	)
+      		;;(revealer 
+			;;	:transition "slideright" 
+			;;	:reveal bat-reveal 
+			;;	:duration "350ms"
+        	;;	(label 
+			;;		:class "bat-label" 
+			;;		:text "${battery[0]}")
+			;;)
+		;;)
+ 	) 
 )
 
 (defwidget wifi []
@@ -112,7 +116,7 @@
 			:hexpand "false"
       		(label 
 				:class "wifi-icon" 
-				:text "${network[1]}"
+				:text network-icon
 			)
       		(revealer 
 				:transition "slideleft" 

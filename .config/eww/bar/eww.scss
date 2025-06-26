@@ -47,20 +47,20 @@ $gray-alt: #5b6078;
 
 .music-box {
   font-family: "Proxima Nova";
+  font-size: 20px;
   font-weight: bold;
   padding: 10px 10px 0px 0px;
   color: $yellow;
-  font-size: 20px;
 }
 //.music-progress {
 //  margin: 10px;
 //}
 .bat-label {
   font-family: "Proxima Nova";
+  font-size: 22px;
   font-weight: bold;
-  padding: 0px 10px 0px 0px;
+  padding: 0px 5px 0px 0px;
   color: $green;
-  font-size: 18px;
 }
 
 .bat-icon {
@@ -68,8 +68,8 @@ $gray-alt: #5b6078;
 	font-size: 22px;
 	color: $green;
 	padding: 0.5rem;
-	margin-left: 10px;
-	margin-right: 7px;
+//	margin-left: 5px;
+	margin-right: 4px;
 }
 
 .seperator {
@@ -89,10 +89,10 @@ $gray-alt: #5b6078;
 
 .wifi-label {
   font-family: "Proxima Nova";
+  font-size: 22px;
   font-weight: bold;
   padding: 0px 10px 0px 0px;
   color: $red;
-  font-size: 22px;
 }
 
 .brightness-icon {
@@ -116,7 +116,7 @@ $gray-alt: #5b6078;
 }
 
 .volume-icon {
-  font-family: "Favorites";
+  font-family: "Material Design Icons Desktop";
   font-size: 22px;
   color: $green;
   margin-left: 10px;
@@ -145,10 +145,10 @@ $gray-alt: #5b6078;
 
 .bluetooth-label {
   font-family: "Proxima Nova";
+  font-size: 22px;
   font-weight: bold;
   padding: 0px 10px 0px 0px;
   color: $green;
-  font-size: 22px;
 }
 
 .clock-box {
@@ -161,10 +161,23 @@ $gray-alt: #5b6078;
 	margin-right: 7px;
 }
 
-.weather-box {
-  border-radius: 30%;
-  border: 10px;
-  margin-left: 5px;
+.weather-text {
+  font-family: "Proxima Nova";
+  font-size: 22px;
+//  font-weight: bold;
+//  padding: 0px 10px 0px 0px;
+//  border-radius: 30%;
+//  border: 10px;
+//  background-color: $bg-alt;
+}
+
+.weather-label {
+  font-family: "Proxima Nova";
+  font-size: 22px;
+  font-weight: bold;
+  padding: 0px 10px 0px 0px;
+//  border-radius: 30%;
+//  border: 10px;
 //  background-color: $bg-alt;
 }
 
@@ -173,12 +186,10 @@ $gray-alt: #5b6078;
   font-size: 22px;
   color: #e6e6fa;
   margin-left: 10px;
+  margin-right: 5px;
 }
 
-.weather-text {
-  font-family: "Proxima Nova";
-//  font-weight: bold;
-//  padding: 0px 10px 0px 0px;
-  font-size: 22px;
-  color: #e6e6fa;
+.system { 
+  margin-left: 5px;
+  margin-right: 5px;
 }

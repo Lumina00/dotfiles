@@ -102,4 +102,6 @@ elif [[ $1 = "--vpn" ]]; then
 	vpn
 elif [[ $1 = "--toggle" ]]; then
 	toggle
+elif [[ $1 = "--icon" ]]; then
+	icon
 fi
