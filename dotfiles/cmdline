@@ -1,1 +1,1 @@
-cryptdevice=/dev/nvme0n1p2:cryptlvm:allow-discards root=/dev/myvg/root iommu=pt iommu=1 rw acpi_osi='Windows 2020' idle=nomwait nowatchdog page_alloc.shuffle=1
+pti=on page_alloc.shuffle=1 cryptdevice=/dev/nvme0n1p2:encrypt:allow-discards root=/dev/mapper/encrypt rootflags=subvol=@root iommu=pt iommu=1 rw acpi_osi=Windows 2020 idle=nomwait nowatchdog page_alloc.shuffle=1 kernel.yama.ptrace_scope=2 amdgpu.dcdebugmask=0x10 zswap.enable=1 zswap.zpool=zsmalloc lsm=landlock,lockdown,yama,integrity,tomoyo,bpf quiet

@@ -6,14 +6,23 @@ if [ -d "$HOME/.local/bin" ] ;
 	then PATH="$HOME/.local/bin:$PATH"
 fi
 
+if [ -d "$HOME/node_modules/.bin" ] ;
+	then PATH="$HOME/node_modules/.bin:$PATH"
+fi
 
 if [ -d "$HOME/.cargo/bin" ] ;
 	then PATH="$HOME/.cargo/bin:$PATH"
 fi
 
+RUBYDIR=$(ls -d $HOME/.local/share/gem/ruby/*/bin | sort -V | tail -1)
+
+if [ -d "$RUBYDIR" ] ;
+	then PATH="$RUBYDIR:$PATH"
+fi
+
 export EDITOR=/usr/bin/nvim
 export PAGER=less
-#export WINEPREFIX=~/.wine-appimage-stable
+export WINEPREFIX=~/.wine-appimage-stable
 
 #[ "$TERM" = "xterm-kitty" ] && alias ssh = "kitty +kitten ssh"
 source ~/.local/share/zinit/zinit.git/zinit.zsh
@@ -43,9 +52,8 @@ alias cd..='cd ..'
 alias pdw="pwd"
 alias update='sudo pacman -Syu'
 alias udpate='update'
-alias remove='pacman -Rscn'
+alias remove='pacman -Rscnu'
 alias cls=clear
-alias cp='cp -vr'
 alias xd=cd
 
 alias grep='grep --color=auto'
@@ -54,6 +62,8 @@ alias fgrep='fgrep --color=auto'
 alias cal='cal -m --color=auto'
 alias pacman='sudo pacman --color auto'
 
+alias cp='cp -vr'
+alias mv='mv -v'
 alias df='df -h'
 alias fdisk='sudo fdisk -l'
 alias ssn="sudo shutdown now"
@@ -72,6 +82,7 @@ alias make='make -j 16'
 alias makepkg='makepkg -sriCfc'
 alias update-fc='sudo fc-cache -fv'
 alias cat='bat -pp' 
+alias jj='jj --no-pager'
 
 alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
 alias userlist="cut -d: -f1 /etc/passwd"
@@ -127,7 +138,6 @@ extract_archive() {
 		*.deb)       
 			ar x $1    ;;
 		*)           
-			echo "'$1' cannot be extracted via ex()" ;;
 	esac
 }
 ex() {
