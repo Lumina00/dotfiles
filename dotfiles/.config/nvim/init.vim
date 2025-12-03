@@ -16,7 +16,8 @@ set hidden
 syntax enable
 filetype plugin indent on
 set clipboard+=unnamed,unnamedplus
-packadd termdebug
+
+"packadd termdebug
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'preservim/nerdtree'
 Plug 'majutsushi/tagbar'
@@ -30,10 +31,10 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-lua/plenary.nvim' "Need diffview
 Plug 'sindrets/diffview.nvim'
 
-Plug 'williamboman/mason.nvim'
-Plug 'williamboman/mason-lspconfig.nvim' "Need npm
+"Plug 'williamboman/mason.nvim'
+"Plug 'williamboman/mason-lspconfig.nvim' "Need npm
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-treesitter/nvim-treesitter'
+"Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-omni'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -75,6 +76,7 @@ nmap <leader>k <C-w>k
 nmap <leader>l <C-w>l
 nmap <leader>n <C-w>n
 
+map <R_ALT> <Nop>
 "inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 inoremap <silent> jj <ESC>
 tnoremap <ESC><ESC> <C-\><C-N>

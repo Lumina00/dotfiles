@@ -1,7 +1,8 @@
-require('mason').setup()
-require('mason-lspconfig').setup {
-	ensure_installed = {"clangd", "cmake", "lua_ls", "rust_analyzer", "ruby_ls", "jsonls"}
-}
+--require('mason').setup()
+--require('mason-lspconfig').setup {
+--	ensure_installed = {"clangd", "neocmake", "lua_ls", "rust_analyzer", "ruby_lsp", "jsonls"}
+--}
+
 
 local cmp = require('cmp')
 local luasnip = require('luasnip')
@@ -52,28 +53,41 @@ local lsp_attach = function (client, buf)
 	end
 end
 
-local lspconfig = require('lspconfig')
-lspconfig.clangd.setup({
-	lsp_attach = lsp_attach,
-	capabilities = capabilities,
+vim.lsp.enable ({"clangd", "neocmake", "lua_ls", "rust_analyzer", "ruby_lsp", "jsonls","qmlls"})
+vim.lsp.config('*', {
+  capabilities = {
+    textDocument = {
+      semanticTokens = {
+        multilineTokenSupport = true,
+      }
+    }
+  },
+--  root_markers = { '.git' },
 })
-lspconfig.rust_analyzer.setup({
-	lsp_attach = lsp_attach,
-	capabilities = capabilities,
-})
-lspconfig.cmake.setup({
-	lsp_attach = lsp_attach,
-	capabilities = capabilities,
-})
-lspconfig.lua_ls.setup({
-	lsp_attach = lsp_attach,
-	capabilities = capabilities,
-})
-lspconfig.pyright.setup({
-	lsp_attach = lsp_attach,
-	capabilities = capabilities,
-})
-lspconfig.jsonls.setup({
-	lsp_attach = lsp_attach,
-	capabilities = capabilities,
-})
+--local lspconfig = require('lspconfig')
+--lspconfig.clangd.setup({
+--	lsp_attach = lsp_attach,
+--	capabilities = capabilities,
+--})
+--lspconfig.rust_analyzer.setup({
+--	lsp_attach = lsp_attach,
+--	capabilities = capabilities,
+--})
+--lspconfig.cmake.setup({
+--	lsp_attach = lsp_attach,
+--	capabilities = capabilities,
+--})
+--lspconfig.lua_ls.setup({
+--	lsp_attach = lsp_attach,
+--	capabilities = capabilities,
+--})
+--lspconfig.pyright.setup({
+--	lsp_attach = lsp_attach,
+--	capabilities = capabilities,
+--})
+--lspconfig.jsonls.setup({
+--	lsp_attach = lsp_attach,
+--	capabilities = capabilities,
+--})
+
+vim.diagnostic.config({virtual_text = true })
