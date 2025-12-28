@@ -1,5 +1,8 @@
 # To do list
 
-## eww
+## quickshell
 
-* dashboard  
+* lockscreen 
+* wallpaper
+* notifications
+
