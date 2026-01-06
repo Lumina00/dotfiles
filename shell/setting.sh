@@ -22,10 +22,9 @@ cat mkinitcpio.conf | sudo tee /etc/mkinitcpio.conf
 cat config.ini | sudo tee /etc/ly/config.ini
 cd $shell
 $shell/network.sh $dot $1 $2 
-$shell/firefox.sh $dot
+$shell/librewolf.sh $dot
 
 xdg-user-dirs-update    
-sudo sed -i "23s/$/ --graceful/" /usr/lib/systemd/system/systemd-pcrmachine.service
 git clone https://github.com/lukechilds/refind-ambience /tmp/ambience/
 sudo cp -r /tmp/ambience /boot/efi/EFI/refind/themes/ambience
 exit

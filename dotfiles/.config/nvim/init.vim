@@ -34,7 +34,7 @@ Plug 'sindrets/diffview.nvim'
 "Plug 'williamboman/mason.nvim'
 "Plug 'williamboman/mason-lspconfig.nvim' "Need npm
 Plug 'neovim/nvim-lspconfig'
-"Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-omni'
 Plug 'hrsh7th/cmp-nvim-lsp'
