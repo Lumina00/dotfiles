@@ -17,8 +17,8 @@ cp -r .config ~/
 \cp -f .zshrc ~    
 \cp -f .gdbinit ~    
 sudo cp linux-lts.preset /etc/mkinitcpio.d/linux-lts.preset
-sudo \cp -f cmdline /etc/kernel/cmdline 
-sudo cp mkinitcpio.conf /etc/mkinitcpio.conf
+cat cmdline | sudo tee /etc/kernel/cmdline 
+cat mkinitcpio.conf | sudo tee /etc/mkinitcpio.conf
 cat config.ini | sudo tee /etc/ly/config.ini
 cd $shell
 $shell/network.sh $dot $1 $2 

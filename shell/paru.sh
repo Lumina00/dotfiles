@@ -1,3 +1,3 @@
 #!/bin/sh
-paru -S cppman nft-blackhole
+paru -S nft-blackhole librewolf-bin lkrg-dkms
 exit
