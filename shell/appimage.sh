@@ -7,7 +7,10 @@ curl -s https://api.github.com/repos/ivan-hc/Steam-appimage/releases/latest | aw
 
 curl -s https://api.github.com/repos/mmtrt/WINE_Appimage/releases/tags/continuous-stable | awk -F '\"' '/browser_download_url/ && /AppImage/ {print \$4}'xargs curl -L -o ~/.local/bin/wine 
 
+curl -s https://api.github.com/repos/vicinaehq/vicinae/releases/latest | awk -F '\"' '/browser_download_url/ && /AppImage/ {print \$4}' | xargs curl -L -o ~/.local/bin/vicinae 
+
 chmod +x ~/.local/bin/* 
+exit
 "
 exit
 

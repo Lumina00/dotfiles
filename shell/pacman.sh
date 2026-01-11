@@ -9,6 +9,6 @@ sudo pacman -S --noconfirm --needed rustup cmake docker nodejs \
 if [ "$1" == "1"]; then 
 	pacman -S --noconfirm --needed plasma-desktop powerdevil bluedevil plasma-pa plasma-nm spectacle kgamma kscreen qt6-imageformats kdeconnect konsole kid3 dolphin gwenview xorg-{server,xauth,xinit,xrandr} 
 elif [ "$1" == "2"]; then
-	pacman -S --noconfirm --need hyprland hypridle hyprpolkitagent ruby jq bluetoothctl grim slurp mpd brightlessctl dunst swww upowe quickshellr
+	pacman -S --noconfirm --need hyprland hypridle hyprpolkitagent ruby jq bluetoothctl grim slurp mpd brightlessctl dunst swww upowe quickshell
 fi 
 exit

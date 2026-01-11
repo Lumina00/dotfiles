@@ -10,7 +10,7 @@ cd $dot
 if [ $3 = "2" ];then 
 	mkdir temp
 	git clone https://gitlab.com/lumina0/dotfiles -b hypr temp 
-	mv .config/* .config 
+	mv temp/.config/* .config 
 fi
 cp .tmux.conf ~/    
 cp -r .config ~/        
