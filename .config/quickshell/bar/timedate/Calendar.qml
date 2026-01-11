@@ -1,8 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 
-Rectangle {
+Item {
     id: root
 
     property color colBg
@@ -13,68 +12,80 @@ Rectangle {
     property int selectedYear: new Date().getFullYear()
     property int selectedMonth: new Date().getMonth()
 
-    color: colBg
-    radius: 20
-    
-    // Popup Fade effect
-    opacity: 0
-    Component.onCompleted: opacity = 1
-    Behavior on opacity { NumberAnimation { duration: 200 } }
+    // 오늘 날짜 캐시 — 컴포넌트 생성 시 1회 평가
+    readonly property int _todayYear:  new Date().getFullYear()
+    readonly property int _todayMonth: new Date().getMonth()
+    readonly property int _todayDate:  new Date().getDate()
+
+    ListModel { id: calendarModel }
+
+    onSelectedYearChanged:  Qt.callLater(_rebuildModel)
+    onSelectedMonthChanged: Qt.callLater(_rebuildModel)
+    Component.onCompleted: _rebuildModel()
 
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: 20
 
+        // ── 헤더: 월 네비게이션 ──
         RowLayout {
             Layout.fillWidth: true
             Layout.bottomMargin: 10
-            
+
             Text {
-                text: "<"
+                text: "\u25C0"
                 color: root.colAccent
-                font.pixelSize: 20
+                font.pixelSize: 16
+
                 MouseArea {
                     anchors.fill: parent
+                    anchors.margins: -6
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: changeMonth(-1)
+                    onClicked: root._changeMonth(-1)
                 }
             }
-            
-            Item { Layout.fillWidth: true } 
-            
+
+            Item { Layout.fillWidth: true }
+
             Text {
-                text: Qt.formatDateTime(new Date(root.selectedYear, root.selectedMonth, 1), "MMMM yyyy")
+                text: {
+                    var d = new Date(root.selectedYear, root.selectedMonth, 1);
+                    return Qt.formatDateTime(d, "MMMM yyyy");
+                }
                 color: root.colAccent
                 font.bold: true
                 font.pixelSize: 16
             }
-            
-            Item { Layout.fillWidth: true } 
-            
+
+            Item { Layout.fillWidth: true }
+
             Text {
-                text: ">"
+                text: "\u25B6"
                 color: root.colAccent
-                font.pixelSize: 20
+                font.pixelSize: 16
+
                 MouseArea {
                     anchors.fill: parent
+                    anchors.margins: -6
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: changeMonth(1)
+                    onClicked: root._changeMonth(1)
                 }
             }
         }
 
+        // ── 요일 헤더 (월요일 시작) ──
         GridLayout {
             columns: 7
             columnSpacing: 0
             rowSpacing: 0
             Layout.fillWidth: true
-            Layout.fillHeight: true
+            Layout.preferredHeight: 30
 
             Repeater {
-                model: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+                model: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
                 delegate: Item {
                     Layout.fillWidth: true
-                    Layout.preferredHeight: 30
+                    Layout.fillHeight: true
                     Text {
                         anchors.centerIn: parent
                         text: modelData
@@ -84,68 +95,102 @@ Rectangle {
                     }
                 }
             }
+        }
+
+        // ── 날짜 그리드 ──
+        GridLayout {
+            columns: 7
+            columnSpacing: 0
+            rowSpacing: 0
+            Layout.fillWidth: true
+            Layout.fillHeight: true
 
             Repeater {
-                model: getCalendarModel(root.selectedYear, root.selectedMonth)
+                model: calendarModel
+
                 delegate: Rectangle {
                     Layout.fillWidth: true
                     Layout.preferredHeight: width
                     radius: width / 2
-                    color: modelData.isToday ? root.colHighlight : "transparent"
-                    
-                    Rectangle {
+                    color: model.isToday ? root.colHighlight : "transparent"
+
+                    // 오늘 링 — 필요할 때만 인스턴스화
+                    Loader {
                         anchors.fill: parent
                         anchors.margins: 2
-                        radius: width / 2
-                        color: "transparent"
-                        border.color: root.colAccent
-                        border.width: 1
-                        visible: modelData.isToday
+                        active: model.isToday
+                        sourceComponent: Rectangle {
+                            radius: width / 2
+                            color: "transparent"
+                            border.color: root.colAccent
+                            border.width: 1
+                        }
                     }
+
                     Text {
                         anchors.centerIn: parent
-                        text: modelData.dateNum
-                        color: !modelData.isCurrentMonth ? Qt.darker(root.colDim) : (modelData.isToday ? "white" : root.colAccent)
-                        font.bold: modelData.isToday
+                        text: model.dateNum
+                        color: !model.isCurrent
+                               ? Qt.darker(root.colDim)
+                               : (model.isToday ? "#FFFFFF" : root.colAccent)
+                        font.bold: model.isToday
+                        font.pixelSize: 13
                     }
                 }
             }
         }
     }
 
-    function changeMonth(step) {
-        let nextMonth = root.selectedMonth + step;
-        if (nextMonth > 11) {
-            root.selectedMonth = 0;
-            root.selectedYear++;
-        } else if (nextMonth < 0) {
-            root.selectedMonth = 11;
-            root.selectedYear--;
-        } else {
-            root.selectedMonth = nextMonth;
-        }
+    // ── 내부 함수 ──
+
+    function _changeMonth(step) {
+        var m = root.selectedMonth + step;
+        if (m > 11)       { root.selectedMonth = 0;  root.selectedYear++; }
+        else if (m < 0)   { root.selectedMonth = 11; root.selectedYear--; }
+        else              { root.selectedMonth = m; }
     }
 
-    function getCalendarModel(year, month) {
-        let firstDay = new Date(year, month, 1).getDay(); 
-        let daysInMonth = new Date(year, month + 1, 0).getDate();
-        let daysInPrevMonth = new Date(year, month, 0).getDate();
-        let result = [];
-        
-        for (let i = 0; i < firstDay; i++) {
-            result.push({ dateNum: daysInPrevMonth - firstDay + 1 + i, isCurrentMonth: false, isToday: false });
+    function _rebuildModel() {
+        calendarModel.clear();
+
+        var year  = root.selectedYear;
+        var month = root.selectedMonth;
+
+        var dayOfWeek   = new Date(year, month, 1).getDay();
+        var firstDay    = (dayOfWeek + 6) % 7;           // Mon=0 … Sun=6
+        var daysInMonth = new Date(year, month + 1, 0).getDate();
+        var daysInPrev  = new Date(year, month, 0).getDate();
+
+        var ty = root._todayYear, tm = root._todayMonth, td = root._todayDate;
+
+        // 이전 달 잔여
+        for (var i = 0; i < firstDay; i++) {
+            calendarModel.append({
+                dateNum:   daysInPrev - firstDay + 1 + i,
+                isCurrent: false,
+                isToday:   false
+            });
         }
-        
-        let today = new Date();
-        for (let i = 1; i <= daysInMonth; i++) {
-            let isToday = (today.getFullYear() === year && today.getMonth() === month && today.getDate() === i);
-            result.push({ dateNum: i, isCurrentMonth: true, isToday: isToday });
+
+        // 이번 달
+        var checkToday = (ty === year && tm === month);
+        for (var d = 1; d <= daysInMonth; d++) {
+            calendarModel.append({
+                dateNum:   d,
+                isCurrent: true,
+                isToday:   checkToday && d === td
+            });
         }
-        
-        while (result.length < 42) {
-            result.push({ dateNum: result.length - (firstDay + daysInMonth) + 1, isCurrentMonth: false, isToday: false });
+
+        // 다음 달 채움 — 5주(35)로 충분하면 35, 아니면 42
+        var total  = calendarModel.count;
+        var target = total <= 35 ? 35 : 42;
+        for (var n = 1; total < target; n++, total++) {
+            calendarModel.append({
+                dateNum:   n,
+                isCurrent: false,
+                isToday:   false
+            });
         }
-            
-        return result;
     }
 }

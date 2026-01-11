@@ -1,48 +1,129 @@
+import Quickshell
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
 
 import "timedate"
+import "mpris"
+import "battery"
+import "weather"
+import "network"
+import "notifications"
+import "bluetooth"
 
-PanelWindow {
-    id: barWindow
-    
-    anchors {
-        top: true
-        bottom: true
-        left: true
-    }
+Scope {
+    Variants {
+        model: Quickshell.screens
 
-    width: 60
-    
-    color: "transparent"
+        PanelWindow {
+            id: panel
+            property var modelData
+			screen: modelData
 
-    ColumnLayout {
-        id: barLayout
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        
-        anchors.leftMargin: 10
-        anchors.bottomMargin: 20
-        spacing: 15
+			signal barClicked()
 
-        Item {
-            Layout.fillHeight: true
-            Layout.preferredWidth: 1 // dummy
-        }
-        Sound {
-            id: volumeWidget
-//            anchors.horizontalCenter: parent.horizontalCenter
-        }
-		Battery {
-            id: myBattery
-            
-            Layout.alignment: Qt.AlignHCenter
-        }
+            anchors {
+                left: true
+                top: true
+                bottom: true
+            }
 
-        TimeWidget {
-            Layout.alignment: Qt.AlignLeft
+            color: "#e01e1e2e"
+
+			implicitWidth: 55
+
+
+			MouseArea {
+       			anchors.fill: parent
+        		z: -1
+        		onClicked: panel.barClicked()
+    		}
+
+            ColumnLayout {
+                anchors.fill: parent
+                spacing: 0
+
+                // Top
+
+                Notifications {
+                    Layout.preferredWidth: 50
+                    Layout.preferredHeight: 50
+                    //barWidth: sidebar.width
+                    Layout.alignment: Qt.AlignHCenter
+                }
+                WorkspaceWidget {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: implicitHeight
+                    Layout.topMargin: 5
+                }
+
+                // middle
+                Item {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                }
+
+
+                MprisWidget {
+                    id: mpris
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: implicitHeight
+                    parentWindow: panel
+                }
+
+                // bottom
+                Item {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                }
+
+				SystemTrayIcon {
+    				Layout.alignment: Qt.AlignHCenter
+					Layout.preferredWidth: 36
+    				Layout.preferredHeight: implicitHeight
+    				parentWindow: panel
+				}
+
+                WeatherWidget {
+                    Layout.alignment: Qt.AlignHCenter
+                }
+
+                Row {
+                    Layout.alignment: Qt.AlignHCenter
+                    spacing: 4
+
+                    Brightness {
+                        id: brightnessWidget
+                    }
+
+                    Volume {
+                        id: volumeWidget
+                    	parentWindow: panel
+                    }
+                }
+
+                BluetoothWidget {
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.preferredWidth: 40
+                    Layout.preferredHeight: 40
+                    parentWindow: panel
+                }
+
+                NetworkWidget {
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.preferredWidth: 40
+                    Layout.preferredHeight: 40
+                    parentWindow: panel
+                }
+
+                Battery {
+                    id: batteryWidget
+                    Layout.alignment: Qt.AlignHCenter
+                }
+
+                TimeWidget {
+                    Layout.alignment: Qt.AlignLeft
+                }
+            }
         }
     }
 }

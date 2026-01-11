@@ -12,14 +12,18 @@ scripts=$config/scripts
 
 
 # wallpaper
-$scripts/wallpaper $config/wallpapers/4.jpg &
+#$scripts/wallpaper $config/wallpapers/4.jpg &
 $scripts/tools/dynamic &
 
 # other
 dbus-update-activation-environment --systemd --all WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
+xrandr --output eDP-1 --primary
 
-eww -c ~/.config/eww/ open bar
+#eww -c ~/.config/eww/ open bar
+
 kime &
 udiskie & 
 systemctl --user start hypridle hyprpolkitagent
 mpd
+vicinae server &
+qs &

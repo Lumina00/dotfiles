@@ -1,51 +1,103 @@
-//@ pragma ShellId shell
-
 import Quickshell
-import Quickshell.Io
 import Quickshell.Wayland
+import Quickshell.Io
 import QtQuick
-import QtQuick.Layouts
-import "bar" as Bar
-//import "notifications" as Notifs
+
+import "bar"
+import "lockscreen"
 
 ShellRoot {
-	Process {
-		command: ["mkdir", "-p", ShellGlobals.rtpath]
-		running: true
-	}
+    id: shellRoot
 
+    // BackgroundImage ──
+    Variants {
+        model: Quickshell.screens
 
-//	Notifs.NotificationOverlay {
-//		screen: Quickshell.screens.find(s => s.name == "DP-1")
-//	}
+        PanelWindow {
+            property var modelData
+            screen: modelData
 
-	Variants {
-		model: Quickshell.screens
+            anchors {
+                left: true
+                right: true
+                top: true
+                bottom: true
+            }
 
-		Scope {
-			property var modelData
+            aboveWindows: false
+            exclusionMode: ExclusionMode.Ignore
+            color: "black"
 
-			Bar.Bar {
-				screen: modelData
-			}
-
-			PanelWindow {
-				id: window
-
-				screen: modelData
-
-				exclusionMode: ExclusionMode.Ignore
-//				WlrLayershell.layer: WlrLayer.Background
-				WlrLayershell.namespace: "shell:background"
-
-				anchors {
-					top: true
-					bottom: true
-					left: true
-					right: true
-				}
-
-			}
+            BackgroundImage {
+                anchors.fill: parent
+                screen: modelData
+            }
 		}
 	}
+    Bar {}
+
+    LockContext {
+        id: lockContext
+
+        onUnlocked: {
+            sessionLock.locked = false
+        }
+    }
+
+    WlSessionLock {
+        id: sessionLock
+        locked: false
+
+        WlSessionLockSurface {
+            LockSurface {
+                anchors.fill: parent
+                context: lockContext
+            }
+        }
+    }
+
+    // Lock trigger
+
+    function doLock() {
+        lockContext.currentText = ""
+        lockContext.showFailure = false
+        sessionLock.locked = true
+    }
+
+    //IPC — qs ipc call lockscreen lock
+    IpcHandler {
+        target: "lockscreen"
+
+        function lock(): void {
+            shellRoot.doLock()
+        }
+    }
+
+    Process {
+        id: lockListener
+        command: [
+            "gdbus", "monitor", "--system",
+            "--dest", "org.freedesktop.login1"
+        ]
+        running: true
+
+        stdout: SplitParser {
+            onRead: function(line) {
+                if (line.indexOf(".Lock ()") !== -1) {
+                    shellRoot.doLock()
+                }
+            }
+        }
+
+        onExited: function(exitCode, exitStatus) {
+            restartListener.start()
+        }
+    }
+
+    Timer {
+        id: restartListener
+        interval: 2000
+        onTriggered: lockListener.running = true
+    }
+
 }
