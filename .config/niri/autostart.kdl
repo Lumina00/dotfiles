@@ -1,0 +1,4 @@
+spawn-at-startup "qs"; 
+spawn-at-startup "kime";
+spawn-at-startup "~/.local/bin/vicinae" "server";
+//spawn-sh-at-startup "xrandr" "--output" "eDP-1" "--primary"
