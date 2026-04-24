@@ -114,7 +114,7 @@ input {
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
     // Set gaps around windows in logical pixels.
-    gaps 10
+    gaps 2
     background-color "transparent"
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -177,7 +177,7 @@ layout {
     border {
         on
 
-        width 4
+        width 5
         active-gradient from="#cba6f7ff" to="#94e2d5ff" angle=45
         inactive-color "#ff45475a"
 
@@ -328,8 +328,8 @@ window-rule {
 
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
-/-window-rule {
-    geometry-corner-radius 20
+window-rule {
+    geometry-corner-radius 15
     clip-to-geometry true
 }
 
