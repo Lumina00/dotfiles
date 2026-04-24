@@ -53,6 +53,7 @@ Item {
         }
     }
 
+    // ── Power Profile ──
     property string currentProfile: "balanced"
 
     Process {
@@ -222,7 +223,7 @@ Item {
                         color: ThemeGradient.textPrimary
                         font.pixelSize: 22
                         font.bold: true
-                        font.family: "Monospace"
+                        font.family: "Proxima Nova"
                     }
 
                     Text {
@@ -234,6 +235,7 @@ Item {
                     }
                 }
 
+                // ── Bat bar — light gradient ──
                 Rectangle {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 6

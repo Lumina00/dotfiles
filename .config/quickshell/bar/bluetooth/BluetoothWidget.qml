@@ -47,14 +47,28 @@ Item {
         if (level > 0.2) return "#FFA726";
         return "#EF5350";
     }
+	
+	Rectangle {
+        anchors.centerIn: parent
+        width: 36; height: 36; radius: 10
+        color: hoverArea.containsMouse
+            ? Qt.rgba(ThemeGradient.dark.start.r,
+                      ThemeGradient.dark.start.g,
+                      ThemeGradient.dark.start.b, 0.3)
+            : "transparent"
 
+        Behavior on color {
+            ColorAnimation { duration: 150 }
+        }
+    }
 	//bar icon
     Rectangle {
         id: iconBg
         anchors.centerIn: parent
         width: 36; height: 36; radius: 18
         gradient: root.hasConnected ? ThemeGradient.dark.iconBg : null
-        color: root.hasConnected ? "transparent" : root._inactiveBg
+        color: "transparent"
+
 
         Text {
             anchors.centerIn: parent

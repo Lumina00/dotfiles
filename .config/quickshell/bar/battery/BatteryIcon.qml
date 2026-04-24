@@ -21,17 +21,32 @@ Rectangle {
         if (root.charging) return ThemeGradient.dark.start;
         if (root.percent <= 15) return ThemeGradient.light.end;
         if (root.percent <= 30) return ThemeGradient.light.mid;
-		if (root.percent == 100) return ThemeGradient.dark.end;
+        if (root.percent == 100) return ThemeGradient.dark.end;
         return ThemeGradient.light.start;
     }
 
     MouseArea {
+        id: hoverArea
         anchors.fill: parent
         hoverEnabled: true
         acceptedButtons: Qt.NoButton
 
         onEntered: root.hoverEntered()
         onExited: root.hoverExited()
+    }
+
+    Rectangle {
+        anchors.centerIn: parent
+        width: 36; height: parent.height - 4; radius: 10
+        color: hoverArea.containsMouse
+            ? Qt.rgba(ThemeGradient.dark.start.r,
+                      ThemeGradient.dark.start.g,
+                      ThemeGradient.dark.start.b, 0.3)
+            : "transparent"
+
+        Behavior on color {
+            ColorAnimation { duration: 150 }
+        }
     }
 
     ColumnLayout {
