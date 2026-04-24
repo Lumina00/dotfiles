@@ -1,4 +1,3 @@
-// SystemTrayWidget.qml
 pragma ComponentBehavior: Bound
 
 import QtQuick
@@ -67,17 +66,23 @@ ListView {
             id: menuPopup
             anchor.window: trayList.parentWindow
             anchor.rect.x: trayList.parentWindow.implicitWidth + 4
-            anchor.rect.y: trayItem.mapToItem(null, 0, 0).y
+ 			anchor.rect.y: 0 // 초기값, 열 때 갱신됨
             color: "transparent"
             implicitWidth: 200
             implicitHeight: menuColumn.implicitHeight + 16
             visible: false
+			
+			function show() {
+				var pos = trayItem.mapToItem(trayList.parentWindow.contentItem, 0, 0)
+				menuPopup.anchor.rect.y = pos.y
+				menuPopup.visible = true
+			}
 
-            onVisibleChanged: {
-                if (!visible && trayList.activePopup === menuPopup) {
-                    trayList.activePopup = null
-                }
-            }
+//            onVisibleChanged: {
+//                if (!visible && trayList.activePopup === menuPopup) {
+//                    trayList.activePopup = null
+//                }
+//            }
 
             Rectangle {
                 anchors.fill: parent
@@ -106,7 +111,8 @@ ListView {
                         readonly property bool isSep: modelData.isSeparator === true
 
                         width: menuColumn.width
-                        height: isSep ? 11 : 32
+                        height: menuEntry.isSep ? 11 : 32
+
 
                         Rectangle {
                             anchors.fill: parent
@@ -142,11 +148,20 @@ ListView {
                             hoverEnabled: true
                             enabled: !menuEntry.isSep
 
+                            property var entry: menuEntry.modelData
+                            property bool entrySep: menuEntry.isSep
+
                             onClicked: {
-                                if (typeof menuEntry.modelData.activate === "function") {
-                                    menuEntry.modelData.activate()
-                                } else if (typeof menuEntry.modelData.trigger === "function") {
-                                    menuEntry.modelData.trigger()
+                                if (entryMouse.entrySep) return
+
+                                var e = entryMouse.entry
+
+                                if (typeof e.activate === "function") {
+                                    e.activate()
+                                } else if (typeof e.trigger === "function") {
+                                    e.trigger()
+                                } else if (typeof e.triggered === "function") {
+                                    e.triggered()
                                 }
                                 menuPopup.visible = false
                             }
@@ -172,7 +187,7 @@ ListView {
                             trayList.closeActive()
                         } else {
                             trayList.closeActive()
-                            menuPopup.visible = true
+                            menuPopup.show()
                             trayList.activePopup = menuPopup
                         }
                     }
